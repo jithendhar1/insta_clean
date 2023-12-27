@@ -210,11 +210,11 @@ for (VechicleBean tasks : tax) {
     <td><%=tasks.getVehicleModel() %></td>
     <td><%=tasks.getVIN() %></td>
     <td>
-        <a href="edit_tasks.jsp?task_id=<%= tasks.getVehicleID() %>">Edit</a>
+        <a href="vechicle_edit.jsp?vehicleID=<%= tasks.getVehicleID() %>">Edit</a>
     </td>
     <td>
 <%--          <a href="delete_task.jsp?id=<%= tasks.getTask_id() %>">Delete</a>  --%>
-        <a href="DeleteVechicleSrv?task_id=<%= tasks.getVehicleID() %>">Delete</a> 
+        <a href="DeleteVechicleSrv?VehicleID=<%= tasks.getVehicleID() %>">Delete</a> 
     </td>
 </tr>
 <%
@@ -250,7 +250,7 @@ for (VechicleBean tasks : tax) {
 				<!-- /Page Content -->
 				
 				<!-- Add Tax Modal -->
-				 <jsp:include page="addvechicle.jsp" />
+				 <jsp:include page="vechicle_add.jsp" />
 				<!-- /Add Tax Modal -->
 				
 				<%-- <!-- Edit Tax Modal -->

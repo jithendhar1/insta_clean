@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 
-  <form action="./SearchCustomerSrv" method="post">
+ <%--  <form action="./SearchCustomerSrv" method="post">
              
             <div class="row filter-row">
                 <div class="col-sm-6 col-md-3">
@@ -151,7 +151,7 @@
         </select>
         
     </div>
-</form>            
+</form>           --%>  
             
             
                 <div class="row">

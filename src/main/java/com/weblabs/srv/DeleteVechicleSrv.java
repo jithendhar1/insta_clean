@@ -20,13 +20,13 @@ public class DeleteVechicleSrv  extends HttpServlet {
 	            throws ServletException, IOException {
 
 	  
-	    	String vehicleID = request.getParameter("vehicleID");
+	    	String vehicleID = request.getParameter("VehicleID");
 
 	    	VechicleServiceImpl b = new VechicleServiceImpl();
 
 			String status = b.deleteV(vehicleID);
 			
-	        RequestDispatcher rd = request.getRequestDispatcher("delete_vechicle.jsp?message=" + status);
+	        RequestDispatcher rd = request.getRequestDispatcher("vechicle_delete.jsp?message=" + status);
 	        rd.forward(request, response);
 	    }
 
