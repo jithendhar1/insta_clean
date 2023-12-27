@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.weblabs.beans.VechicleBean;
-import com.weblabs.service.impl.VechicleDAO;
+import com.weblabs.DAO.VechicleDAO;
 
 
 @WebServlet("/SearchVechicleSrv")
@@ -24,7 +24,7 @@ public class SearchVechicleSrv extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
     	String vechicleFilter = request.getParameter("supplierName");
-        String idFilter = request.getParameter("supplierID");
+        String idFilter = request.getParameter("vehicleID");
   
 
         String startParam = request.getParameter("start");
@@ -44,19 +44,19 @@ public class SearchVechicleSrv extends HttpServlet {
          
       	if (idFilter == null || idFilter.isEmpty()) {
       	 int idFilterInt = 0;
-      	suppliers = SupplierDAO.getFilteredSuppliers("supplierName like '%" + vechicleFilter + "%' or supplierID = '" + idFilterInt + "'", start, limit);
+      	suppliers = VechicleDAO.getFilteredVechicles("vehicleID like '%" + vechicleFilter + "%' or vehicleID = '" + idFilterInt + "'", start, limit);
       	}
       	else {
-      		suppliers = SupplierDAO.getFilteredSuppliers("supplierName like '%" + vechicleFilter + "%' and supplierID = '" + idFilter + "'", start, limit);
+      		suppliers = VechicleDAO.getFilteredVechicles("vehicleID like '%" + vechicleFilter + "%' and vehicleID = '" + idFilter + "'", start, limit);
       	}
       	} else {
           // Retrieve all data
-      		suppliers = SupplierDAO.getFilteredSuppliers("", start, limit);
+      		suppliers = VechicleDAO.getFilteredVechicles("", start, limit);
       }
 
     request.setAttribute("suppliers", suppliers);
     request.setAttribute("search", "true");
-    request.getRequestDispatcher("/supplier.jsp").forward(request, response);
+    request.getRequestDispatcher("/vechicle.jsp").forward(request, response);
 
     
   }

@@ -12,10 +12,9 @@ import com.weblabs.utility.DBUtil;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 
-@WebServlet("/CustomerSrv")
+@WebServlet("/AddCustomerSrv")
 public class AddCustomerSrv extends HttpServlet {
 	
 	 
@@ -72,21 +71,21 @@ public class AddCustomerSrv extends HttpServlet {
 	   	      int affectedRows = customerStatement.executeUpdate();
 
 	   	   if (affectedRows > 0) {
-	   	       ResultSet generatedKeys = customerStatement.getGeneratedKeys();
-	   	       if (generatedKeys.next()) {
-	   	           int customerID = generatedKeys.getInt(1);
+	   	     //  ResultSet generatedKeys = customerStatement.getGeneratedKeys();
+	   	     // if (generatedKeys.next()) {
+	   	          // int customerID = generatedKeys.getInt(1);
 
 	   	  
-	   	           String addressInsertSQL = "INSERT INTO address (customerID,street, city, postal_code, state, hno) VALUES (?, ?, ?, ?, ?)";
+	   	           String addressInsertSQL = "INSERT INTO address (street, city, postal_code, state, hno) VALUES (?, ?, ?, ?, ?)";
 	   	           PreparedStatement addressStatement = conn.prepareStatement(addressInsertSQL);
 
 	   	  
-	   	           addressStatement.setInt(1, customerID);       
-	   	           addressStatement.setString(2, street[0]);
-	   	           addressStatement.setString(3, city[0]);
-	   	           addressStatement.setString(4, postal_code[0]);
-	   	           addressStatement.setString(5, state[0]);
-	   	           addressStatement.setString(6, hno[0]);
+	   	          // addressStatement.setInt(1, customerID);       
+	   	           addressStatement.setString(1, street[0]);
+	   	           addressStatement.setString(2, city[0]);
+	   	           addressStatement.setString(3, postal_code[0]);
+	   	           addressStatement.setString(4, state[0]);
+	   	           addressStatement.setString(5, hno[0]);
 	   	              
 	   	               
 	   	               
@@ -103,10 +102,10 @@ public class AddCustomerSrv extends HttpServlet {
 	   	    customerStatement.close();
 	   	   }
 
-	   	  }   
+	   	     
         
 	       
-	            response.sendRedirect("customer.jsp");
+	            response.sendRedirect("addcustomerprofile.jsp");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	      
