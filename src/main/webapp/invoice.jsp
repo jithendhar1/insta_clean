@@ -97,7 +97,7 @@
     <!-- Main Wrapper -->
     <div class="main-wrapper">
 
-       
+       <jsp:include page="sidebar.jsp" />
         <div class="page-wrapper">
 
             <!-- Page Content -->

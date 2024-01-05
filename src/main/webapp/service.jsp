@@ -90,7 +90,7 @@ if (newRecordsPerPageParam != null) {
         <div class="main-wrapper">
 		
 		 <!-- Header -->
-     
+     <jsp:include page="sidebar.jsp" />
         <!-- Include your sidebar HTML here -->			
 			<!-- Page Wrapper -->
             <div class="page-wrapper">

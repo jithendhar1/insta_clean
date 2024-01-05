@@ -44,7 +44,13 @@ public class CustomerLoginSrv extends HttpServlet {
     	Connection con = DBUtil.provideConnection();
 	    PreparedStatement ps = null;
         try {
-            String sql = "SELECT customer.email, customer.otp from customer  WHERE email=? AND otp=?";
+           // String sql = "SELECT customer.email, customer.otp from customer  WHERE email=? AND otp=?";
+        	 String sql = "SELECT customer.email, customer.otp, designations.RoleID, customer.customerID " +
+                     "FROM insta_clean.customer " +
+                     "INNER JOIN insta_clean.designations ON customer.Designationid = designations.Designationid " +
+                     "WHERE customer.email = ? AND customer.otp = ?";
+
+
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, username);
             statement.setString(2, password);
@@ -54,7 +60,9 @@ public class CustomerLoginSrv extends HttpServlet {
             	 HttpSession session = request.getSession();
 				session.setAttribute("otp",  result.getString("otp")  );
                 session.setAttribute("email", result.getString("email"));
-                              
+                session.setAttribute("customerID", result.getString("customerID"));
+				session.setAttribute("RoleID", result.getString("RoleID"));
+              
             	 
                 con.close();
                 return true;

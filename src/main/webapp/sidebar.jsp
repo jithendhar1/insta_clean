@@ -18,7 +18,7 @@
     } else {
     	   int roleid = Integer.parseInt(roleIDString);
 
-%>
+%> 
 
 
 <!DOCTYPE html>
@@ -79,8 +79,8 @@
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul style="display: none;">
-                                <li><a href="index.jsp">Admin Dashboard</a></li>
-                                <li><a href="employee_dashboard.jsp">User Dashboard</a></li>
+                                <li><a href="admin_dashboard.jsp">Admin Dashboard</a></li>
+                                <!-- <li><a href="employee_dashboard.jsp">User Dashboard</a></li> -->
                             </ul>
                         </li>
                         <li class="menu-title">
@@ -107,7 +107,7 @@
                                     String DisplayName = resultSet.getString("DisplayName");
                                     String moduleName = resultSet.getString("ModuleName");
                                     String formName = resultSet.getString("FormName");
-                                    String link = formName + ".jsp";
+                                    String link = formName ;
 
                                     // Check if the module has changed
                                     if (!moduleName.equals(currentModule)) {
