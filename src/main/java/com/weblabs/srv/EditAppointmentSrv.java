@@ -22,26 +22,29 @@ public class EditAppointmentSrv extends HttpServlet {
             throws ServletException, IOException {
 
        // String status1 = "Edit  Failed!"; 
+    	//in jsp order write*****************
+        String appointmentID = request.getParameter("appointmentID");
         String customerID= request.getParameter("customerID");
         String vehicleID = request.getParameter("vehicleID");
         String serviceID = request.getParameter("serviceID");
         String appointmentdate = request.getParameter("appointmentdate");
         String status = request.getParameter("status");
-        String appointmentID = request.getParameter("appointmentID");
         
         AppointmentBean dept = new AppointmentBean();
+        //same above order
+        dept.setAppointmentID(appointmentID);
         dept.setCustomerID(customerID);
         dept.setVehicleID(vehicleID);
         dept.setServiceID(serviceID);
         dept.setAppointmentdate(appointmentdate);
         dept.setStatus(status);
-        dept.setAppointmentID(appointmentID);
+        //dept.setAppointmentID(appointmentID);
         
         AppointmentServiceImp dao = new AppointmentServiceImp();
    
-        String status2 = dao.editA(customerID, vehicleID, serviceID, appointmentdate, status,appointmentID);
+        String status2 = dao.editA(appointmentID,customerID, vehicleID, serviceID, appointmentdate, status);
 
-        RequestDispatcher rd = request.getRequestDispatcher("edit_.jsp?message=" + status2);
+        RequestDispatcher rd = request.getRequestDispatcher("appointment_edit.jsp?message=" + status2);
         rd.forward(request, response);
     }
 

@@ -2,7 +2,8 @@
 <%@ page import="com.weblabs.beans.VechicleBean" %>
 <%@ page import="com.weblabs.DAO.VechicleDAO" %>
 <%@ page import="java.util.List" %>
-
+<%@ page import="com.weblabs.beans.CustomerBean" %>
+<%@ page import="com.weblabs.DAO.CustomerDAO" %>
     
   <!DOCTYPE html>
 <html>
@@ -73,11 +74,31 @@
 
     <div class="col-md-6">
         <div class="form-group">
-            <label for="customerID">Customer ID <span class="text-danger">*</span></label>
-            <input id="customerID" name="customerID" class="form-control" type="text" value="<%= task.getCustomerID() %>">
+             <label for="customerID">Customer ID <span class="text-danger">*</span></label>
+            <input id="customerID" name="customerID" class="form-control" type="text" value="<%= task.getCustomerID() %>"> 
+        <%--     <label style="margin-top: 40px;" class="col-form-label">customer Name <span class="text-danger">*</span></label>
+              <select class="abc2" style=" width:270px;" name="customerID" required class="form-control" required>
+                                    <%
+                                            String selectedClientId = task.getCustomerID();
+                                            List<CustomerBean> projects = CustomerDAO.getAllCustomer();
+                                            
+                                            for (CustomerBean project : projects) {
+                                    %>
+                                    <option value="<%= project.getProjectname() %>" <%= (project.getProject_id().equals(task.getProject_id())) ? "selected" : "" %>><%= project.getProjectname() %></option>
+                                    <option value="<%= project.getCustomerID()%>" <%= (selectedClientId != null && selectedClientId.equals(task.getCustomerID())) ? "selected" : "" %>><%= project.getCustomerID() %></option>
+                                    
+                                    <%
+                                            }
+                                      
+                                    %>
+                                </select> --%>
         </div>
     </div>
-
+ <script>
+    $(document).ready(function() {
+        $('.abc2').select2();
+    });
+</script>  
     <div class="col-sm-6">
         <div class="form-group">
             <label for="vehicleType">Vehicle Type <span class="text-danger">*</span></label>
@@ -116,5 +137,16 @@
     }}}
 %>
 
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
 
+		
 

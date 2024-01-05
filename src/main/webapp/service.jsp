@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.weblabs.service.impl.VechicleServiceImpl" %>
-<%@ page import="com.weblabs.beans.VechicleBean" %>
+<%@ page import="com.weblabs.service.impl.ServiceServiceImpl" %>
+<%@ page import="com.weblabs.beans.ServiceBean" %>
 <%@ page import="java.util.List" %>
-<%@page import="com.weblabs.DAO.VechicleDAO"%>
+<%@page import="com.weblabs.DAO.ServiceDAO"%>
 <%@page import="com.weblabs.DAO.CustomerDAO"%>
 <%@ page import="com.weblabs.beans.CustomerBean" %>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
         <meta name="author" content="Dreamguys - Bootstrap Admin Template">
         <meta name="robots" content="noindex, nofollow">
-        <title>vechicle -  template</title>
+        <title>Services -  template</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -105,27 +105,28 @@ if (newRecordsPerPageParam != null) {
 							<div id="welcomeMessage" style="text-align: center; margin-top: 20px; font-size: 24px;">
                                 Welcome 
                               </div>
-								<h3 class="page-title">Vechicless</h3>
+								<h3 class="page-title">Services</h3>
 								<!-- <ul class="breadcrumb">
 									<li class="breadcrumb-item"><a href="index.jsp">Dashboard</a></li>
 									<li class="breadcrumb-item active">Tasks</li>
 								</ul> -->
 							</div>
 							<div class="col-auto float-right ml-auto">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#addvechicle"><i class="fa fa-plus"></i> Add Vechicle</a>
+							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#addservice"><i class="fa fa-plus"></i> Add Services</a>
 							</div>
 						</div>
 					</div>
 					<!-- /Page Header -->
 					<!-- Search Filter -->
-					<form action="./SearchVechicleSrv" method="post">
+					<form action="./SearchServiceSrv" method="post">
     <div class="row filter-row">
         <div class="col-sm-6 col-md-3">
             <div class="form-group form-focus select-focus">
-                <label for="id">vehicleID:</label>
-                <input type="text" name="vehicleID" id="vehicleID">
+                <label for="serviceID">serviceID:</label>
+                <input type="text" name="serviceID" id="serviceID">
             </div>
         </div>
+        
         <div class="col-sm-6 col-md-3">
             <input style="margin-top: 29px;" type="submit" value="Search">
         </div>
@@ -148,11 +149,12 @@ if (newRecordsPerPageParam != null) {
 									<thead>
 										<tr>
 							
-											<th>vehicleID</th>
-											<th>customerName </th>
-									        <th>vehicleType</th>
-									        <th>vehicleModel</th>
-									        <th>VIN</th>
+											<th>serviceID</th>
+											<th>servicename </th>
+									        <th>description</th>
+									        <th>price</th>
+									        <th>discount</th>
+									        <th>coupons</th>
 									        <th>Edit</th>
 									         <th>Delete</th>    
 										</tr>
@@ -173,8 +175,8 @@ if (pageNoStr != null) {
 start = (pageno - 1) * limit;
 // pagenation code ended
 String usernameFilter = request.getParameter("description");
-String idFilter = request.getParameter("vehicleID");
-List<VechicleBean> tax;
+String idFilter = request.getParameter("serviceID");
+List<ServiceBean> tax;
 
 String whereClause = ""; // Initialize an empty whereClause
 
@@ -186,36 +188,36 @@ if (idFilter != null && !idFilter.isEmpty()) {
     if (!whereClause.isEmpty()) {
         whereClause += " or ";
     }
-    whereClause += "vehicleID = '" + idFilter + "'";
+    whereClause += "serviceID = '" + idFilter + "'";
 }
 // page
-int recordcount = VechicleDAO.totalCount();
+int recordcount = ServiceDAO.totalCount();
 
 noOfPages = (int) Math.ceil((double) recordcount / limit);
 // pagee
 if (!whereClause.isEmpty()) {
     // Apply the whereClause condition
-    tax = VechicleDAO.getFilteredVechicles(whereClause, start, limit);
+    tax = ServiceDAO.getFilteredServices(whereClause, start, limit);
 } else {
     // Retrieve all data based on the limit
-    tax = VechicleDAO.getFilteredVechicles("", start, limit);
+    tax = ServiceDAO.getFilteredServices("", start, limit);
 }
-for (VechicleBean tasks : tax) {
-	CustomerBean pro = CustomerDAO.getCustomerById(tasks.getCustomerID()); 
+for (ServiceBean tasks : tax) {
+	//CustomerBean pro = CustomerDAO.getCustomerById(tasks.getCustomerID()); 
 %>
 <tr>
-    <td><%=tasks.getVehicleID() %></td>
-   <%--  <td><%=tasks.getCustomerID() %></td> --%>
-   <td><%= pro != null ? pro.getCustomername() : "N/A" %></td> 
-    <td><%=tasks.getVehicleType() %></td>
-    <td><%=tasks.getVehicleModel() %></td>
-    <td><%=tasks.getVIN() %></td>
+    <td><%=tasks.getServiceID() %></td>
+    <td><%=tasks.getServicename() %></td>  
+    <td><%=tasks.getDescription() %></td>
+    <td><%=tasks.getPrice() %></td>
+    <td><%=tasks.getDiscount() %></td>
+     <td><%=tasks.getCoupons() %></td>
     <td>
-        <a href="vechicle_edit.jsp?vehicleID=<%= tasks.getVehicleID() %>">Edit</a>
+        <a href="service_edit.jsp?serviceID=<%= tasks.getServiceID() %>">Edit</a>
     </td>
     <td>
 <%--          <a href="delete_task.jsp?id=<%= tasks.getTask_id() %>">Delete</a>  --%>
-        <a href="DeleteVechicleSrv?VehicleID=<%= tasks.getVehicleID() %>">Delete</a> 
+        <a href="DeleteServiceSrv?serviceID=<%= tasks.getServiceID() %>">Delete</a> 
     </td>
 </tr>
 <%
@@ -228,19 +230,19 @@ for (VechicleBean tasks : tax) {
    <!-- Pagination links -->
 
     <% if (pageno > 1) { %>
-        <a href="vechicle.jsp?page=<%=pageno - 1%>">Previous</a>
+        <a href="service.jsp?page=<%=pageno - 1%>">Previous</a>
     <% } %>
 
     <% for (int i = 1; i <= noOfPages; i++) { %>
         <% if (i == pageno) { %>
             <%=i%>
         <% } else { %>
-            <a href="vechicle.jsp?page=<%=i%>"><%=i%></a>
+            <a href="service.jsp?page=<%=i%>"><%=i%></a>
         <% } %>
     <% } %>
 
     <% if (pageno < noOfPages) { %>
-        <a href="vechicle.jsp?page=<%=pageno + 1%>">Next</a>
+        <a href="service.jsp?page=<%=pageno + 1%>">Next</a>
     <% } %>
 
 </div>
@@ -251,16 +253,8 @@ for (VechicleBean tasks : tax) {
 				<!-- /Page Content -->
 				
 				<!-- Add Tax Modal -->
-				 <jsp:include page="vechicle_add.jsp" />
-				<!-- /Add Tax Modal -->
-				
-				<%-- <!-- Edit Tax Modal -->
-				 <jsp:include page="edit_tasks.jsp" />
-				<!-- /Edit Tax Modal -->
-				
-				<!-- Delete Tax Modal -->
-				 <jsp:include page="delete_task.jsp" />
-				<!-- /Delete Tax Modal --> --%>
+				 <jsp:include page="service_add.jsp" />
+			
 				
             </div>
 	

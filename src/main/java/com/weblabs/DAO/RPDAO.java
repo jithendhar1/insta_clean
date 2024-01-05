@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.weblabs.beans.ServiceBean;
+import com.weblabs.beans.RolePermissionBean;
 import com.weblabs.utility.DBUtil;
 
-public class ServiceDAO {
+public class RPDAO {
 
-	 public static List<ServiceBean> getFilteredServices(String whereClause, int start, int limit) {
-	        List<ServiceBean> FilteredServices = new ArrayList<>();
+	 public static List<RolePermissionBean> getFilteredRP(String whereClause, int start, int limit) {
+	        List<RolePermissionBean> filteredrps = new ArrayList<>();
 	        Connection connection = null;
 	        PreparedStatement preparedStatement = null;
 	        ResultSet resultSet = null;
@@ -22,10 +22,10 @@ public class ServiceDAO {
 	            connection = DBUtil.provideConnection();
 	            String query;
 	            if (whereClause != null && !whereClause.isEmpty()) {
-	                query = "SELECT  serviceID, servicename, description, price, discount, coupons FROM service WHERE " + whereClause + " LIMIT ? , ?;";
+	                query = "SELECT  RolePermissionID, RoleID, ModuleName, FormName, PermissionType FROM rolepermissions WHERE " + whereClause + " LIMIT ? , ?;";
 	               
 	            } else {
-	                query = "SELECT  serviceID, servicename, description, price, discount, coupons FROM service LIMIT ? , ?;";
+	                query = "SELECT  RolePermissionID, RoleID, ModuleName, FormName, PermissionType FROM rolepermissions LIMIT ? , ?;";
 	            }
 
 	            preparedStatement = connection.prepareStatement(query);
@@ -35,14 +35,16 @@ public class ServiceDAO {
 	            resultSet = preparedStatement.executeQuery();
 
 	            while (resultSet.next()) {
-	            	ServiceBean role = new ServiceBean();
-	            role.setServiceID(resultSet.getString("serviceID"));
-          	    role.setServicename(resultSet.getString("servicename"));
-          	    role.setDescription(resultSet.getString("description"));
-          	    role.setPrice(resultSet.getString("price"));
-         	    role.setDiscount(resultSet.getString("discount"));
-         	   role.setCoupons(resultSet.getString("coupons"));
-         	  FilteredServices.add(role);
+	            	
+	            	RolePermissionBean rp = new RolePermissionBean();
+	            	
+	            	
+	            	rp.setRolePermissionID(resultSet.getString("RolePermissionID"));
+	            	rp.setRoleID(resultSet.getString("roleid"));
+	            	rp.setModuleName(resultSet.getString("modulename"));
+	            	rp.setFormName(resultSet.getString("formname"));
+	            	rp.setPermissionType(resultSet.getString("permissiontype"));
+	                filteredrps.add(rp);
 	            }
 	        } catch (Exception e) {
 	            // Handle exceptions
@@ -59,17 +61,19 @@ public class ServiceDAO {
 	            }
 	        }
 
-	        return FilteredServices;
+	        return filteredrps;
 	        
 	    } 
-	  public static int totalCount() {
+	        
+	
+	   public static int totalCount() {
 			 int count = 0;
 			 Connection connection = null;
 		        PreparedStatement ps = null;
 		        ResultSet rs = null;
 			 try {
 				 connection = DBUtil.provideConnection();
-			   String query = "select count(*) as count from service";
+			   String query = "select count(*) as count from rolepermissions";
 			 ps = connection.prepareStatement(query);
 			 rs = ps.executeQuery();
 			 while (rs.next()) {
@@ -86,4 +90,6 @@ public class ServiceDAO {
 			 }
 			 return count;
 			 }
+
+	
 }

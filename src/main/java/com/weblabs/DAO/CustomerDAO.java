@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weblabs.beans.AddressBean;
+import com.weblabs.beans.CreateProject;
 import com.weblabs.beans.CustomerBean;
 import com.weblabs.utility.DBUtil;
 
@@ -71,7 +72,7 @@ public class CustomerDAO {
 	}
 
 	
-	public static List<AddressBean> getInvoiceItemsByInvoiceId(String invoiceId) {
+	public static List<AddressBean> getAddressItemsByCustomerId(String CustomerID) {
 	    List<AddressBean> invoiceItemsByInvoiceId = new ArrayList<>();
 	    Connection connection = null;
 	    PreparedStatement preparedStatement = null;
@@ -79,9 +80,9 @@ public class CustomerDAO {
 
 	    try {
 	        connection = DBUtil.provideConnection();
-	        String query = "SELECT addressID, customerID, street, city, postal_code, state, hno FROM address WHERE customerID = ?";
+	        String query ="SELECT addressID, customerID, street, city, postal_code, state, hno FROM address WHERE customerID = ?";
 	        preparedStatement = connection.prepareStatement(query);
-	        preparedStatement.setString(1, invoiceId);
+	        preparedStatement.setString(1, CustomerID);
 
 	        resultSet = preparedStatement.executeQuery();
 	        while (resultSet.next()) {
@@ -95,7 +96,7 @@ public class CustomerDAO {
 	            invoiceItem.setHno(resultSet.getString("hno"));
 	            invoiceItemsByInvoiceId.add(invoiceItem);
 	        }
-	    } catch (SQLException e) {
+	    } catch(SQLException e) {
 	        e.printStackTrace();
 	    } finally {
 	        try {
@@ -143,6 +144,79 @@ public class CustomerDAO {
 		return count;
 	}
 
+//get customername from id
+	
+	public static CustomerBean getCustomerById(String customerID) {
+		CustomerBean project = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
+        try {
+            connection = DBUtil.provideConnection();
+            String query = "SELECT customername FROM customer WHERE customerID = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, customerID);
+            resultSet = preparedStatement.executeQuery();
 
+            if (resultSet.next()) {
+            	project = new CustomerBean();
+            	project.setCustomername(resultSet.getString("customername"));
+               
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return project;
+    }
+
+	
+	//for sake of search+retrive list of customers from DB (in dropdown)
+	 public static List<CustomerBean> getAllCustomer() {
+	        List<CustomerBean> allProjects = new ArrayList<>();
+	        Connection connection = null;
+	        PreparedStatement preparedStatement = null;
+	        ResultSet resultSet = null;
+
+	        try {
+	            connection = DBUtil.provideConnection();
+	            String query = "SELECT customerID, customername, email, phno, firstname, lastname FROM customer";
+	            preparedStatement = connection.prepareStatement(query);
+	            resultSet = preparedStatement.executeQuery();
+
+	            while (resultSet.next()) {
+	            	CustomerBean project = new CustomerBean();
+	                project.setCustomerID(resultSet.getString("customerID"));
+	                project.setCustomername(resultSet.getString("customername"));
+	                project.setEmail(resultSet.getString("email"));
+	                project.setPhno(resultSet.getString("phno"));
+	                project.setFirstname(resultSet.getString("firstname"));
+	                project.setLastname(resultSet.getString("lastname"));
+	                
+	 
+	                allProjects.add(project);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (resultSet != null) resultSet.close();
+	                if (preparedStatement != null) preparedStatement.close();
+	                if (connection != null) connection.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        return allProjects;
+	    }
+	    
 }

@@ -1,12 +1,5 @@
 <form action="./AddVechicleSrv" method="post">
 <div id="addvechicle" class="modal custom-modal fade" role="dialog">
-   <!--  <div class="col-md-6">
-        <div class="form-group">
-            <label class="col-form-label">Vehicle ID</label>
-            <input name="vehicleID" required class="form-control" type="text">
-        </div>
-    </div> -->
-
     <div class="col-md-6">
         <div class="form-group">
             <label for="customerID">Customer ID <span class="text-danger">*</span></label>
@@ -36,7 +29,7 @@
     </div>
 
     <div class="submit-section">
-        <button type="submit" name="addvehicle" class="btn btn-primary submit-btn">Submit</button>
+        <button type="submit"  class="btn btn-primary submit-btn">Submit</button>
     </div>
 </div>
 </form>

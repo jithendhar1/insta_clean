@@ -1,6 +1,6 @@
-<%@ page import="com.weblabs.DAO.CustomerDAO" %>
-<%@ page import="com.weblabs.beans.AddressBean" %>
-<%@ page import="com.weblabs.beans.CustomerBean" %>
+<%@ page import="com.weblabs.DAO.InvoiceDAO" %>
+<%@ page import="com.weblabs.beans.InvoiceBean" %>
+<%@ page import="com.weblabs.beans.InvoicitemsBean" %>
 <%@ page import="java.util.List" %>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
     <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Invoices - HRMS admin template</title>
+    <title>Invoices -  template</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -81,7 +81,7 @@
     int recordsPerPage = Integer.parseInt(recordsPerPageStr);
 
     if (currentPageStr == null || "0".equals(currentPageStr)) {
-        currentPageStr = "0";
+        currentPageStr = "1";
         sessionRec.setAttribute("currentPage", currentPageStr);
     }
     int currentPage = Integer.parseInt(currentPageStr);
@@ -98,8 +98,6 @@
     <div class="main-wrapper">
 
        
-
-        <!-- Page Wrapper -->
         <div class="page-wrapper">
 
             <!-- Page Content -->
@@ -109,51 +107,15 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h3 class="page-title">Customer profiles</h3>
+                            <h3 class="page-title">Invoices</h3>
                             
-                        </div>
                         <div class="col-auto float-right ml-auto">
-                            <a href="customerprofile_add.jsp" class="btn add-btn"><i class="fa fa-plus"></i> Create profile</a>
+                            <a href="invoice-add.jsp" class="btn add-btn"><i class="fa fa-plus"></i> Create Invoice</a>
                         </div>
                     </div>
                 </div>
                 
-  <form action="./SearchCustomerSrv" method="post">
-             
-            <div class="row filter-row">
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group form-focus">
-                        <label for="customername">customername:</label>
-                        <input type="text" name="customername" id="customername">
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="form-group form-focus select-focus">
-                        <label for="customerID">customerID:</label>
-                        <input type="text" name="customerID" id="customerID">
-                    </div>
-                </div>
-               
-                <div class="col-sm-6 col-md-3">
-                    <input type="submit" value="Search">
-                </div>
-            </div>
-<input type="hidden" name="start" value="<%= currentPage %>">
-    <input type="hidden" name="limit" value="<%= newRecordsPerPage %>">
-
-    <div class="col-sm-6 col-md-3" id = "flag">
-        <label>Records per page:</label>
-        <select id="recordsPerPage" onchange="changeRecordsPerPage()">
-            
-            <option value="10">10</option>
-           
-          
-        </select>
-        
-    </div>
-</form>            
-            
-            
+ 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -161,13 +123,18 @@
                             <table  class="table table-striped custom-table" id="parentTable">
                                 <thead>
                                     <tr>
-                                      
-                                        <th>customerID </th>
-                                        <th>customername </th>
-                                        <th>email</th>
-                                        <th>phno</th>
-                                        <th>firstname</th>
-                                        <th>lastname </th>
+                                       
+                                        <th>Invoice ID</th>
+                                        <th>appointmentID </th>
+                                        <th>customerID</th>
+                                        <th>invoicedate</th>
+                                        <th>duedate</th>
+                                        <th>totalamt </th>
+                                        <th>otherinformation </th>
+                                        <th>tax </th>
+                                        <th>discount </th>
+                                        <th>taxamount</th>
+                                        
                                         <th style="text-align: center;" colspan="2">Actions</th>
                                        </tr>
                                 </thead>
@@ -175,47 +142,51 @@
                                     <%
                                     int start = 0;
                                     int limit = 25;
-                                    String usernameFilter = request.getParameter("customername");
-                                    String idFilter = request.getParameter("customerID");
-                                    List<CustomerBean> resultSet;
+                                    String usernameFilter = request.getParameter("appointmentID");
+                                    String idFilter = request.getParameter("invoiceID");
+                                    List<InvoiceBean> resultSet;
 
                                     String whereClause = ""; // Initialize an empty whereClause
 
                                     if (usernameFilter != null && !usernameFilter.isEmpty()) {
-                                        whereClause = "customername = '" + usernameFilter + "'";
+                                        whereClause = "appointmentID = '" + usernameFilter + "'";
                                     }
 
                                     if (idFilter != null && !idFilter.isEmpty()) {
                                         if (!whereClause.isEmpty()) {
                                             whereClause += " AND ";
                                         }
-                                        whereClause += "customerID = '" + idFilter + "'";
+                                        whereClause += "appointmentID = '" + idFilter + "'";
                                     }
 
                                     if (!whereClause.isEmpty()) {
                                         // Apply the whereClause condition
-                                        resultSet = CustomerDAO.getFilteredCustomers(whereClause, start, limit);
+                                        resultSet = InvoiceDAO.getFilteredInvoices(whereClause, start, limit);
                                     } else {
                                         // Retrieve all data based on the limit
-                                        resultSet = CustomerDAO.getFilteredCustomers("", start, limit);
+                                        resultSet = InvoiceDAO.getFilteredInvoices("", start, limit);
                                     }
                            
                                         
                                   for (int i = 0; i < resultSet.size(); i++) {
-                                	  CustomerBean invoice = resultSet.get(i);
+                                	  InvoiceBean invoice = resultSet.get(i);
                                     %>
                                     <tr  class="parentRow">
-                                      
+                                    
                                         <!-- Parent table data -->
-                                        <td class="toggle"><%= invoice.getCustomerID()%></td>
-                                        <td class="toggle"><%= invoice.getCustomername() %></td>
-                                        <td class="toggle"><%= invoice.getEmail() %></td>
-                                        <td class="toggle"><%= invoice.getPhno() %></td>
-                                        <td class="toggle"><%= invoice.getFirstname() %></td>
-                                        <td class="toggle"><%= invoice.getLastname() %></td>
-                                        
+                                        <td class="toggle"><%= invoice.getInvoiceID()%></td>
+                                       <td class="toggle"><%= invoice.getAppointmentID()%></td>
+                                       <td class="toggle"><%= invoice.getCustomerID()%></td>
+                                        <td class="toggle"><%= invoice.getInvoicedate()%></td>
+                                            <td class="toggle"><%= invoice.getDuedate()%></td>
+                                       <td class="toggle"><%= invoice.getTotalamt()%></td>
+                                       <td class="toggle"><%= invoice.getOtherinformation()%></td>
+                                        <td class="toggle"><%= invoice.getTax()%></td>
+                                            <td class="toggle"><%= invoice.getDiscount()%></td>
+                                       <td class="toggle"><%= invoice.getTaxamount()%></td>
+                                     
                                         <td>
-                                      <a href="customerprofile_edit.jsp?customerID=<%= invoice.getCustomerID() %>">Edit</a>
+                                      <a href="invoice_edit.jsp?invoiceID=<%= invoice.getInvoiceID() %>">Edit</a>
                                        </td>
                                         
                                     </tr>
@@ -227,31 +198,28 @@
 										            <thead>
 										                <tr>
 										                    <!-- Child table headers -->
-										                 
-										                    <th>addressID</th>
-										                    <th>customerID</th>
-										                    <th>street</th>
-										                    <th>city</th>
-										                    <th>postal_code</th>
-										                    <th>state</th>
-										                    <th>hno</th>
+										                   
+										                    <th>service item</th>
+										                    <th>Description</th>
+										                    <th>UnitCost</th>
+										                    <th>Quantity</th>
+										                    <th>Amount</th>
 										                </tr>
 										            </thead>
 										            <tbody>
 										                <% 
-										                    List<AddressBean> invoiceItems = CustomerDAO.getAddressItemsByCustomerId(invoice.getCustomerID());
-										                    for (AddressBean invoiceItem : invoiceItems) {
+										                    List<InvoicitemsBean> invoiceItems = InvoiceDAO.getInvoiceItemsByInvoiceId(invoice.getInvoiceID());
+										                    for (InvoicitemsBean invoiceItem : invoiceItems) {
 										                %>
 										                <tr>
-										                    <!-- Child table data -->
+										                   
 										                    
-										                    <td><%= invoiceItem.getAddressID() %></td>
-										                    <td><%= invoiceItem.getCustomerID() %></td>
-										                    <td><%= invoiceItem.getStreet() %></td>
-										                    <td><%= invoiceItem.getCity() %></td>
-										                    <td><%= invoiceItem.getPostal_code() %></td>
-										                    <td><%= invoiceItem.getState() %></td>
-										                    <td><%= invoiceItem.getHno() %></td>
+										                    <td><%= invoiceItem.getServiceitem() %></td>
+										                    <td><%= invoiceItem.getDescription() %></td>
+										                    <td><%= invoiceItem.getUnitcost() %></td>
+										                    <td><%= invoiceItem.getQty() %></td>
+										                    <td><%= invoiceItem.getAmount() %></td>
+										                    
 										                </tr>
 										                <%
 										                    } 

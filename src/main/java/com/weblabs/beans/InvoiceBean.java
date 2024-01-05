@@ -8,6 +8,10 @@ public class InvoiceBean {
 	private String invoicedate;
 	private String duedate;
 	private String totalamt;
+	private String otherinformation;
+	private String tax;
+	private String discount;
+	private String taxamount;
 	
 	
 	public String getInvoiceID() {
@@ -46,7 +50,31 @@ public class InvoiceBean {
 	public void setTotalamt(String totalamt) {
 		this.totalamt = totalamt;
 	}
-	
+	public String getOtherinformation() {
+		return otherinformation;
+	}
+	public void setOtherinformation(String otherinformation) {
+		this.otherinformation = otherinformation;
+	}
+	public String getTax() {
+		return tax;
+	}
+	public void setTax(String tax) {
+		this.tax = tax;
+	}
+	public String getDiscount() {
+		return discount;
+	}
+	public void setDiscount(String discount) {
+		this.discount = discount;
+	}
+	public String getTaxamount() {
+		return taxamount;
+	}
+	public void setTaxamount(String taxamount) {
+		this.taxamount = taxamount;
+	}
+		
 	
 	
 }
