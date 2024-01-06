@@ -107,7 +107,12 @@
             <input name="coupons" required class="form-control" type="text" value="<%= task.getCoupons() %>">
         </div>
     </div>
-
+<div class="col-md-6">
+        <div class="form-group">
+            <label class="col-form-label">type <span class="text-danger">*</span></label>
+            <input name="type" required class="form-control" type="text" value="<%= task.getType() %>">
+        </div>
+    </div>
     <div class="submit-section">
         <button type="submit"  class="btn btn-primary submit-btn">Submit</button>
     </div>

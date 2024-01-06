@@ -150,6 +150,7 @@ if (newRecordsPerPageParam != null) {
 									        <th>phno</th>
 									        <th>address</th>
 									        <th>salary</th>
+									        <th>department</th>
 									        <th>Edit</th>
 									         <th>Delete</th>    
 										</tr>
@@ -206,6 +207,7 @@ for (WorkerBean tasks : tax) {
     <td><%=tasks.getPhno() %></td>
     <td><%=tasks.getAddress() %></td>
     <td><%=tasks.getSalary() %></td>
+    <td><%=tasks.getDepartment() %></td>
     <td>
         <a href="worker_edit.jsp?workerID=<%= tasks.getWorkerID() %>">Edit</a>
     </td>

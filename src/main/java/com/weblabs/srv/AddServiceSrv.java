@@ -27,12 +27,12 @@ public class AddServiceSrv  extends HttpServlet {
 	        String price = request.getParameter("price");
 	        String discount = request.getParameter("discount"); 
 	        String coupons = request.getParameter("coupons");
-	       
+	        String type = request.getParameter("type");
 	      
 	        ServiceServiceImpl add =new ServiceServiceImpl();
-	        status1=add.addS( servicename, description, price, discount, coupons);
+	        status1=add.addS( servicename, description, price, discount, coupons,type);
 	  	  
-	    		   RequestDispatcher rd = request.getRequestDispatcher("add_.jsp?message=" + status1);
+	    		   RequestDispatcher rd = request.getRequestDispatcher("service_add.jsp?message=" + status1);
 	       rd.forward(request, response);
 	    } 
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response)

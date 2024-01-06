@@ -11,7 +11,7 @@ public class ServiceServiceImpl {
 	
 	//serviceID, servicename, description, price, discount, coupons
 	
-	public String addS(String servicename,String description,String price,String discount,String coupons) {
+	public String addS(String servicename,String description,String price,String discount,String coupons,String type) {
 		
 		String Status1 = " Adding Failed!";
 
@@ -19,13 +19,13 @@ public class ServiceServiceImpl {
         PreparedStatement ps = null;
 
         try {
-        	ps = con.prepareStatement("INSERT INTO service ( servicename, description, price, discount, coupons) VALUES (?,?,?,?,?)");
+        	ps = con.prepareStatement("INSERT INTO service ( servicename, description, price, discount, coupons,type) VALUES (?,?,?,?,?,?)");
         	ps.setString(1, servicename);
         	ps.setString(2, description);
             ps.setString(3, price);
             ps.setString(4, discount);
             ps.setString(5, coupons);
-          
+            ps.setString(6, type);
            
             int k = ps.executeUpdate();
 
@@ -44,7 +44,7 @@ public class ServiceServiceImpl {
 	}
 	
 	
-	public String editS(String serviceID,String servicename,String description,String price,String discount,String coupons)  {
+	public String editS(String serviceID,String servicename,String description,String price,String discount,String coupons,String type)  {
 		
 			String Status3 = "Updating  Failed!";
 
@@ -52,14 +52,15 @@ public class ServiceServiceImpl {
 	        PreparedStatement ps = null;
 
 	        try {
-	        	ps = con.prepareStatement("UPDATE service SET  servicename= ?, description= ?, price= ?, discount= ?, coupons= ? WHERE appointmentID = ?");
+	        	ps = con.prepareStatement("UPDATE service SET  servicename= ?, description= ?, price= ?, discount= ?, coupons= ?,type= ? WHERE serviceID = ?");
 	        	
 	        	ps.setString(1, servicename);
 	        	ps.setString(2, description);
 	            ps.setString(3, price);
 	            ps.setString(4, discount);
 	            ps.setString(5, coupons);
-	            ps.setString(6, serviceID);
+	            ps.setString(6, type);
+	            ps.setString(7, serviceID);
 	           
 	            int k = ps.executeUpdate();
 

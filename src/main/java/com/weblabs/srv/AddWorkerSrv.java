@@ -25,12 +25,12 @@ public class AddWorkerSrv  extends HttpServlet {
 	        String phno = request.getParameter("phno");
 	        String address = request.getParameter("address");
 	        String salary = request.getParameter("salary"); 
-	       
+	        String department = request.getParameter("department"); 
 	      
 	        WorkerServiceImpl add =new WorkerServiceImpl();
-	        status=add.addW( worker_name, phno, address, salary);
+	        status=add.addW( worker_name, phno, address, salary,department);
 	  	  
-	    		   RequestDispatcher rd = request.getRequestDispatcher("add_.jsp?message=" + status);
+	    		   RequestDispatcher rd = request.getRequestDispatcher("worker_add.jsp?message=" + status);
 	       rd.forward(request, response);
 	    } 
 	    protected void doPost(HttpServletRequest request, HttpServletResponse response)

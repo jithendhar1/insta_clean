@@ -10,7 +10,7 @@ public class ServiceBean {
 	private String price;
 	private String discount;
 	private String coupons;
-	
+	private String type;
 	
 	public String getServiceID() {
 		return serviceID;
@@ -48,6 +48,13 @@ public class ServiceBean {
 	public void setCoupons(String coupons) {
 		this.coupons = coupons;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 	
 	

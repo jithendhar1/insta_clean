@@ -9,6 +9,7 @@ public class VechicleBean {
 	private String vehicleType;
 	private String vehicleModel;
 	private String VIN;
+	private String brand;
 	
 	
 	public String getVehicleID() {
@@ -41,8 +42,12 @@ public class VechicleBean {
 	public void setVIN(String vIN) {
 		VIN = vIN;
 	}
-
-	
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 	
 	
 }

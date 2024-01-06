@@ -150,6 +150,7 @@ if (newRecordsPerPageParam != null) {
 									        <th>vehicleType</th>
 									        <th>vehicleModel</th>
 									        <th>VIN</th>
+									        <th>brand</th>
 									        <th>Edit</th>
 									         <th>Delete</th>    
 										</tr>
@@ -207,6 +208,7 @@ for (VechicleBean tasks : tax) {
     <td><%=tasks.getVehicleType() %></td>
     <td><%=tasks.getVehicleModel() %></td>
     <td><%=tasks.getVIN() %></td>
+    <td><%=tasks.getBrand() %></td>
     <td>
         <a href="vechicle_edit.jsp?vehicleID=<%= tasks.getVehicleID() %>">Edit</a>
     </td>

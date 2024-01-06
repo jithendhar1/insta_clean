@@ -12,7 +12,7 @@ public class WorkerServiceImpl {
 	
 	//workerID, worker_name, phno, address, salary
 	
-	public String addW(String worker_name,String phno,String address,String salary) {
+	public String addW(String worker_name,String phno,String address,String salary,String department) {
 		
 		String Status1 = "Vechicle Adding Failed!";
 
@@ -20,12 +20,12 @@ public class WorkerServiceImpl {
         PreparedStatement ps = null;
 
         try {
-        	ps = con.prepareStatement("INSERT INTO workers_details (worker_name, phno, address, salary) VALUES (?,?,?,?)");
+        	ps = con.prepareStatement("INSERT INTO workers_details (worker_name, phno, address, salary,department) VALUES (?,?,?,?,?)");
         	ps.setString(1, worker_name);
         	ps.setString(2, phno);
             ps.setString(3, address);
             ps.setString(4, salary);
-            
+            ps.setString(5, department);
            
            
             int k = ps.executeUpdate();
@@ -45,7 +45,7 @@ public class WorkerServiceImpl {
 	}
 	
 //	workerID, worker_name, phno, address, salary
-	public String editW(String workerID,String worker_name,String phno,String address,String salary)  {
+	public String editW(String workerID,String worker_name,String phno,String address,String salary,String department)  {
 		
 			String Status3 = "Updating  Failed!";
 
@@ -53,14 +53,14 @@ public class WorkerServiceImpl {
 	        PreparedStatement ps = null;
 
 	        try {
-	        	ps = con.prepareStatement("UPDATE workers_details SET  worker_name= ?, phno= ?, address= ?, salary= ? WHERE workerID = ?");
+	        	ps = con.prepareStatement("UPDATE workers_details SET  worker_name= ?, phno= ?, address= ?, salary= ?,department= ? WHERE workerID = ?");
 	        	
 	        	ps.setString(1, worker_name);
 	        	ps.setString(2, phno);
 	            ps.setString(3, address);
 	            ps.setString(4, salary);
-	            ps.setString(5, workerID);
-	             
+	            ps.setString(5, department);
+	            ps.setString(6, workerID);
 	           
 	            int k = ps.executeUpdate();
 

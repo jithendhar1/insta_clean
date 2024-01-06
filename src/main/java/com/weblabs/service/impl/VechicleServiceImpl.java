@@ -11,7 +11,7 @@ public class VechicleServiceImpl {
 	
 	//vehicleID, customerID, vehicleType, vehicleModel, VIN
 	
-	public String addV(String customerID,String vehicleType,String vehicleModel,String VIN) {
+	public String addV(String customerID,String vehicleType,String vehicleModel,String VIN,String brand) {
 		
 		String Status1 = "Vechicle Adding Failed!";
 
@@ -19,12 +19,12 @@ public class VechicleServiceImpl {
         PreparedStatement ps = null;
 
         try {
-        	ps = con.prepareStatement("INSERT INTO vehicle (customerID, vehicleType, vehicleModel, VIN) VALUES (?,?,?,?)");
+        	ps = con.prepareStatement("INSERT INTO vehicle (customerID, vehicleType, vehicleModel, VIN,brand) VALUES (?,?,?,?,?)");
         	ps.setString(1, customerID);
         	ps.setString(2, vehicleType);
             ps.setString(3, vehicleModel);
             ps.setString(4, VIN);
-            
+            ps.setString(5, brand);
            
            
             int k = ps.executeUpdate();
@@ -44,7 +44,7 @@ public class VechicleServiceImpl {
 	}
 	
 	
-	public String editV(String vehicleID,String customerID,String vehicleType,String vehicleModel,String VIN)  {
+	public String editV(String vehicleID,String customerID,String vehicleType,String vehicleModel,String VIN,String brand)  {
 		
 			String Status3 = "Updating  Failed!";
 
@@ -52,13 +52,14 @@ public class VechicleServiceImpl {
 	        PreparedStatement ps = null;
 
 	        try {
-	        	ps = con.prepareStatement("UPDATE vehicle SET  customerID= ?, vehicleType= ?, vehicleModel= ?, VIN= ? WHERE vehicleID = ?");
+	        	ps = con.prepareStatement("UPDATE vehicle SET  customerID= ?, vehicleType= ?, vehicleModel= ?, VIN= ?,brand=? WHERE vehicleID = ?");
 	        	
 	        	ps.setString(1, customerID);
 	        	ps.setString(2, vehicleType);
 	            ps.setString(3, vehicleModel);
 	            ps.setString(4, VIN);
-	            ps.setString(5, vehicleID);
+	            ps.setString(5, brand);
+	            ps.setString(6, vehicleID);
 	             
 	           
 	            int k = ps.executeUpdate();

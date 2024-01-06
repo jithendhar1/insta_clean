@@ -22,10 +22,10 @@ public class ServiceDAO {
 	            connection = DBUtil.provideConnection();
 	            String query;
 	            if (whereClause != null && !whereClause.isEmpty()) {
-	                query = "SELECT  serviceID, servicename, description, price, discount, coupons FROM service WHERE " + whereClause + " LIMIT ? , ?;";
+	                query = "SELECT  serviceID, servicename, description, price, discount, coupons,type FROM service WHERE " + whereClause + " LIMIT ? , ?;";
 	               
 	            } else {
-	                query = "SELECT  serviceID, servicename, description, price, discount, coupons FROM service LIMIT ? , ?;";
+	                query = "SELECT  serviceID, servicename, description, price, discount, coupons,type FROM service LIMIT ? , ?;";
 	            }
 
 	            preparedStatement = connection.prepareStatement(query);
@@ -42,6 +42,7 @@ public class ServiceDAO {
           	    role.setPrice(resultSet.getString("price"));
          	    role.setDiscount(resultSet.getString("discount"));
          	   role.setCoupons(resultSet.getString("coupons"));
+         	  role.setType(resultSet.getString("type"));
          	  FilteredServices.add(role);
 	            }
 	        } catch (Exception e) {

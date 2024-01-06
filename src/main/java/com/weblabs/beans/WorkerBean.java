@@ -7,7 +7,7 @@ public class WorkerBean {
 	private String phno;
 	private String address;
 	private String salary;
-	
+	private String department;
 	public String getWorkerID() {
 		return workerID;
 	}
@@ -38,7 +38,12 @@ public class WorkerBean {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
-	
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
 	
 	
 }

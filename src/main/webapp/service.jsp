@@ -155,6 +155,7 @@ if (newRecordsPerPageParam != null) {
 									        <th>price</th>
 									        <th>discount</th>
 									        <th>coupons</th>
+									         <th>type</th>
 									        <th>Edit</th>
 									         <th>Delete</th>    
 										</tr>
@@ -212,6 +213,7 @@ for (ServiceBean tasks : tax) {
     <td><%=tasks.getPrice() %></td>
     <td><%=tasks.getDiscount() %></td>
      <td><%=tasks.getCoupons() %></td>
+     <td><%=tasks.getType() %></td>
     <td>
         <a href="service_edit.jsp?serviceID=<%= tasks.getServiceID() %>">Edit</a>
     </td>

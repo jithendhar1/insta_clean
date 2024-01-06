@@ -27,7 +27,7 @@ public class EditVechicleSrv extends HttpServlet {
         String vehicleType = request.getParameter("vehicleType");
         String vehicleModel = request.getParameter("vehicleModel");
         String VIN = request.getParameter("VIN");
-        
+        String brand = request.getParameter("brand");
         
         VechicleBean dept = new VechicleBean();
         dept.setVehicleID(vehicleID);
@@ -35,13 +35,13 @@ public class EditVechicleSrv extends HttpServlet {
         dept.setVehicleType(vehicleType);
         dept.setVehicleModel(vehicleModel);
         dept.setVIN(VIN);
-        
+        dept.setBrand(brand);
         
         VechicleServiceImpl dao = new VechicleServiceImpl();
    
-        String status1 = dao.editV(vehicleID, customerID, vehicleType, vehicleModel, VIN);
+        String status1 = dao.editV(vehicleID, customerID, vehicleType, vehicleModel, VIN,brand);
 
-        RequestDispatcher rd = request.getRequestDispatcher("edit_vechicle.jsp?message=" + status1);
+        RequestDispatcher rd = request.getRequestDispatcher("vechicle_edit.jsp?message=" + status1);
         rd.forward(request, response);
     }
 

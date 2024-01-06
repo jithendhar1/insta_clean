@@ -22,10 +22,10 @@ public class WorkerDAO {
 	            connection = DBUtil.provideConnection();
 	            String query;
 	            if (whereClause != null && !whereClause.isEmpty()) {
-	                query = "SELECT  workerID, worker_name, phno, address, salary FROM workers_details WHERE " + whereClause + " LIMIT ? , ?;";
+	                query = "SELECT  workerID, worker_name, phno, address, salary,department FROM workers_details WHERE " + whereClause + " LIMIT ? , ?;";
 	               
 	            } else {
-	                query = "SELECT  workerID, worker_name, phno, address, salary FROM workers_details LIMIT ? , ?;";
+	                query = "SELECT  workerID, worker_name, phno, address, salary,department FROM workers_details LIMIT ? , ?;";
 	            }
 
 	            preparedStatement = connection.prepareStatement(query);
@@ -41,7 +41,7 @@ public class WorkerDAO {
           	    role.setPhno(resultSet.getString("phno"));
           	    role.setAddress(resultSet.getString("address"));
          	    role.setSalary(resultSet.getString("salary"));
-         	    
+         	   role.setDepartment(resultSet.getString("department"));
          	   FilteredWorkers.add(role);
 	            }
 	        } catch (Exception e) {

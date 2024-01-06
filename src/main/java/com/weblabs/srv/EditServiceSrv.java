@@ -28,6 +28,7 @@ public class EditServiceSrv extends HttpServlet {
         String price = request.getParameter("price");
         String discount = request.getParameter("discount");
         String coupons = request.getParameter("coupons");
+        String type = request.getParameter("type");
         ServiceBean dept = new ServiceBean();
         
         dept.setServiceID(serviceID);
@@ -36,12 +37,12 @@ public class EditServiceSrv extends HttpServlet {
         dept.setPrice(price);
         dept.setDiscount(discount);
         dept.setCoupons(coupons);
-        
+        dept.setType(type);
         ServiceServiceImpl dao = new ServiceServiceImpl();
    
-        String status2 = dao.editS(serviceID, servicename, description, price, discount, coupons);
+        String status2 = dao.editS(serviceID, servicename, description, price, discount, coupons,type);
 
-        RequestDispatcher rd = request.getRequestDispatcher("edit_.jsp?message=" + status2);
+        RequestDispatcher rd = request.getRequestDispatcher("service_edit.jsp?message=" + status2);
         rd.forward(request, response);
     }
 

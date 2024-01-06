@@ -94,6 +94,12 @@
             <input name="salary" required class="form-control" type="text" value="<%= task.getSalary() %>"> 
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="col-form-label">department <span class="text-danger">*</span></label>
+            <input name="department" required class="form-control" type="text" value="<%= task.getDepartment() %>"> 
+        </div>
+    </div>
     <div class="submit-section">
         <button type="submit"  class="btn btn-primary submit-btn">Submit</button>
     </div>

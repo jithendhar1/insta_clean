@@ -119,7 +119,12 @@
             <input name="VIN" required class="form-control" type="text" value="<%= task.getVIN() %>">
         </div>
     </div>
-
+<div class="col-md-6">
+        <div class="form-group">
+            <label class="col-form-label">brand <span class="text-danger">*</span></label>
+            <input name="brand" required class="form-control" type="text" value="<%= task.getBrand() %>">
+        </div>
+    </div>
     <div class="submit-section">
         <button type="submit"  class="btn btn-primary submit-btn">Submit</button>
     </div>

@@ -22,10 +22,10 @@ public class VechicleDAO {
 	            connection = DBUtil.provideConnection();
 	            String query;
 	            if (whereClause != null && !whereClause.isEmpty()) {
-	                query = "SELECT  vehicleID, customerID, vehicleType, vehicleModel, VIN FROM vehicle WHERE " + whereClause + " LIMIT ? , ?;";
+	                query = "SELECT  vehicleID, customerID, vehicleType, vehicleModel, VIN,brand FROM vehicle WHERE " + whereClause + " LIMIT ? , ?;";
 	               
 	            } else {
-	                query = "SELECT  vehicleID, customerID, vehicleType, vehicleModel, VIN FROM vehicle LIMIT ? , ?;";
+	                query = "SELECT  vehicleID, customerID, vehicleType, vehicleModel, VIN,brand FROM vehicle LIMIT ? , ?;";
 	            }
 
 	            preparedStatement = connection.prepareStatement(query);
@@ -41,7 +41,7 @@ public class VechicleDAO {
              	    role.setVehicleType(resultSet.getString("vehicleType"));
              	    role.setVehicleModel(resultSet.getString("vehicleModel"));
             	    role.setVIN(resultSet.getString("VIN"));
-            	    
+            	    role.setBrand(resultSet.getString("brand"));
             	    FilteredVechicles.add(role);
 	            }
 	        } catch (Exception e) {

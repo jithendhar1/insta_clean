@@ -27,11 +27,12 @@ public class AddVechicleSrv extends HttpServlet {
         String vehicleType = request.getParameter("vehicleType");
         String vehicleModel = request.getParameter("vehicleModel");
         String VIN = request.getParameter("VIN");
-
+        String brand = request.getParameter("brand");
+        
         VechicleServiceImpl add = new VechicleServiceImpl();
-        status = add.addV(customerID, vehicleType, vehicleModel, VIN);
+        status = add.addV(customerID, vehicleType, vehicleModel, VIN,brand);
 
-        RequestDispatcher rd = request.getRequestDispatcher("addvechicle.jsp?message=" + status);
+        RequestDispatcher rd = request.getRequestDispatcher("vechicle_add.jsp?message=" + status);
         rd.forward(request, response);
     }
 

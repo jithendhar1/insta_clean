@@ -16,18 +16,18 @@ import com.weblabs.service.impl.WorkerServiceImpl;
 public class EditWorkerSrv extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    //workerID, worker_name, phno, address, salary
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-       // String status = "Edit  Failed!"; 
+ 
         String workerID= request.getParameter("workerID");
         String worker_name = request.getParameter("worker_name");
         String phno = request.getParameter("phno");
         String address = request.getParameter("address");
         String salary = request.getParameter("salary");
-        
+        String department = request.getParameter("department");
         
         WorkerBean dept = new WorkerBean();
         dept.setWorkerID(workerID);
@@ -35,13 +35,13 @@ public class EditWorkerSrv extends HttpServlet {
         dept.setPhno(phno);
         dept.setAddress(address);
         dept.setSalary(salary);
-        
+        dept.setDepartment(department);
         
         WorkerServiceImpl dao = new WorkerServiceImpl();
    
-        String status1 = dao.editW(workerID, worker_name, phno, address, salary);
+        String status1 = dao.editW(workerID, worker_name, phno, address, salary,department);
 
-        RequestDispatcher rd = request.getRequestDispatcher("edit_vechicle.jsp?message=" + status1);
+        RequestDispatcher rd = request.getRequestDispatcher("worker_edit.jsp?message=" + status1);
         rd.forward(request, response);
     }
 
