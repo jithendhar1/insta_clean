@@ -29,11 +29,11 @@ public class CustomerLoginSrv extends HttpServlet {
    
         if (validate(request, username, password)) {
             
-            response.sendRedirect("admin_dashboard.jsp");
+            response.sendRedirect("invoice.jsp");
         } else {
             String errorMessage = "Invalid username or password";
             request.setAttribute("error", errorMessage);
-            request.setAttribute("wrongusername", "true"); // Set wrongusername attribute
+            request.setAttribute("wrongusername", "true"); 
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
         }
@@ -44,10 +44,17 @@ public class CustomerLoginSrv extends HttpServlet {
     	Connection con = DBUtil.provideConnection();
 	    PreparedStatement ps = null;
         try {
-           // String sql = "SELECT customer.email, customer.otp from customer  WHERE email=? AND otp=?";
-        	 String sql = "SELECT customer.email, customer.otp, designations.RoleID, customer.customerID " +
+          
+			/*
+			 * String sql =
+			 * "SELECT customer.email, customer.otp, designations.RoleID, customer.customerID "
+			 * + "FROM insta_clean.customer " +
+			 * "INNER JOIN insta_clean.designations ON customer.Designationid = designations.Designationid "
+			 * + "WHERE customer.email = ? AND customer.otp = ?";
+			 */
+        	
+        	 String sql = "SELECT customer.email, customer.otp, customer.RoleID, customer.customerID " +
                      "FROM insta_clean.customer " +
-                     "INNER JOIN insta_clean.designations ON customer.Designationid = designations.Designationid " +
                      "WHERE customer.email = ? AND customer.otp = ?";
 
 

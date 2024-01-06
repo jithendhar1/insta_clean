@@ -27,7 +27,8 @@
             <div class="container">
                 <!-- Account Logo -->
                 <div class="account-logo">
-                    <a href="admin_dashboard.jsp"><img src="assets/logo2.png" alt="Company Logo"></a>
+                   <!--  <a href="admin_dashboard.jsp"><img src="assets/logo2.png" alt="Company Logo"></a> -->
+                   <a href="invoice.jsp"><img src="assets/logo2.png" alt="Company Logo"></a>
                 </div>
                 <!-- /Account Logo -->
                 <div class="account-box">

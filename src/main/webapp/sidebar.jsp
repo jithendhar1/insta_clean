@@ -93,9 +93,9 @@
                             	
                           Connection con = DBUtil.provideConnection();
                         	    PreparedStatement ps = null;
-                                String sql = "SELECT roles.rolename, rolepermissions.ModuleName, rolepermissions.FormName, rolepermissions.DisplayName FROM roles "
-                                        + "INNER JOIN rolepermissions ON roles.roleid = rolepermissions.RoleID "
-                                        + "WHERE roles.roleid >= ?   ORDER BY roles.roleid, rolepermissions.ModuleName";
+                                String sql = "SELECT roles.RoleName, rolepermissions.ModuleName, rolepermissions.FormName, rolepermissions.DisplayName FROM roles "
+                                        + "INNER JOIN rolepermissions ON roles.RoleID = rolepermissions.RoleID "
+                                        + "WHERE roles.RoleID >= ?   ORDER BY roles.RoleID, rolepermissions.ModuleName";
                                 
                                  PreparedStatement statement = con.prepareStatement(sql);
                                  statement.setInt(1, roleid);

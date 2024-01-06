@@ -123,7 +123,7 @@
             <div class="row filter-row">
                 <div class="col-sm-6 col-md-3">
                     <div class="form-group form-focus">
-                        <label for="customername">customername:</label>
+                        <label for="customername">customer name:</label>
                         <input type="text" name="customername" id="customername">
                     </div>
                 </div>
