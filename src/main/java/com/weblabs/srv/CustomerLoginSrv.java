@@ -29,7 +29,7 @@ public class CustomerLoginSrv extends HttpServlet {
    
         if (validate(request, username, password)) {
             
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("admin_dashboard.jsp");
         } else {
             String errorMessage = "Invalid username or password";
             request.setAttribute("error", errorMessage);

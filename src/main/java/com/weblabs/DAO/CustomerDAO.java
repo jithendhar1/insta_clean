@@ -218,5 +218,6 @@ public class CustomerDAO {
 	        }
 	        return allProjects;
 	    }
-	    
+	  
+	 
 }
