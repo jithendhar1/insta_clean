@@ -2,7 +2,10 @@
 <%@ page import="com.weblabs.beans.InvoiceBean" %>
 <%@ page import="com.weblabs.beans.InvoicitemsBean" %>
 <%@ page import="java.util.List" %>
-
+<%
+    // Getting the username from the session
+    String username = (String)session.getAttribute("customername");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,6 +110,9 @@
                 <div class="page-header">
                     <div class="row align-items-center">
                         <div class="col">
+                        <div id="welcomeMessage" style="text-align: center; margin-top: 20px; font-size: 24px;">
+                                Welcome  <%= username%>!
+                              </div>
                             <h3 class="page-title">Invoices</h3>
                             
                         <div class="col-auto float-right ml-auto">

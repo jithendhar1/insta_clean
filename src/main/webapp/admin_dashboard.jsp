@@ -9,7 +9,7 @@
 <%@ page import="java.math.BigDecimal" %>
 <%
     // Getting the username from the session
-    String username = (String)session.getAttribute("username");
+    String username = (String)session.getAttribute("customername");
 %>
 <!DOCTYPE html>
 <html lang="en">

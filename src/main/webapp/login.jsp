@@ -87,6 +87,8 @@
     function validateLogin() {
         // Get the input values
         var username = document.getElementById('username').value;
+        console.log("Username: " + username);
+
         var password = document.getElementById('password').value;
 
         // Check if username and password match certain criteria (you can replace this with your validation logic)

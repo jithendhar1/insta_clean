@@ -4,7 +4,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-
+<%
+    // Getting the username from the session
+    String username = (String)session.getAttribute("customername");
+%>
 <%-- <%
 HttpSession sdsession = request.getSession(true);
 
@@ -120,7 +123,7 @@ if (newRecordsPerPageParam != null) {
                 <div class="row align-items-center">
                 <div class="col">
 				<div id="welcomeMessage" style="text-align: center; margin-top: 20px; font-size: 24px;">
-                  <%--   Welcome <%=username%>! --%>
+                   Welcome <%=username%>!
                   </div>
 					<h3 class="page-title">Role Permissions</h3>
 					

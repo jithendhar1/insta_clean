@@ -53,7 +53,7 @@ public class CustomerLoginSrv extends HttpServlet {
 			 * + "WHERE customer.email = ? AND customer.otp = ?";
 			 */
         	
-        	 String sql = "SELECT customer.email, customer.otp, customer.RoleID, customer.customerID " +
+        	 String sql = "SELECT customer.email,customer.customername, customer.otp, customer.RoleID, customer.customerID " +
                      "FROM insta_clean.customer " +
                      "WHERE customer.email = ? AND customer.otp = ?";
 
@@ -65,7 +65,8 @@ public class CustomerLoginSrv extends HttpServlet {
             if (result.next()) {
             	
             	 HttpSession session = request.getSession();
-				session.setAttribute("otp",  result.getString("otp")  );
+				session.setAttribute("otp",  result.getString("otp"));
+				session.setAttribute("customername",  result.getString("customername"));
                 session.setAttribute("email", result.getString("email"));
                 session.setAttribute("customerID", result.getString("customerID"));
 				session.setAttribute("RoleID", result.getString("RoleID"));
