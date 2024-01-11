@@ -105,7 +105,7 @@
 								
 
 <div class="text-center">
-    <button class="btn btn-primary submit-btn" type="submit" name="action" value="save" onclick="setAction('save')" id="saveBtn" disabled>Save</button>
+    <button class="btn btn-primary submit-btn" type="submit" name="action" value="save" onclick="setAction('save')" id="saveBtn" disabled>Add</button>
     <button class="btn btn-primary submit-btn" type="submit" name="action" value="edit" onclick="setAction('edit')">Edit</button>
 </div>
 <!-- ... Rest of your HTML ... -->

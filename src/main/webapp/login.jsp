@@ -35,7 +35,8 @@
                     <div class="account-wrapper">
                         <h3 class="account-title"> Login</h3>
                         <!-- Account Form -->
-                        <form method="post" action="./CustomerLoginSrv">
+                        <!-- <form method="post" action="./CustomerLoginSrv"> -->
+                         <form method="post" action="./LoginSrv"> 
                             <div class="form-group">
                                 <label>User Name</label>
                                 <input class="form-control" id="username"  name="username" required type="text">

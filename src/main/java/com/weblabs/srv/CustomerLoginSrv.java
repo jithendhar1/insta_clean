@@ -78,9 +78,9 @@ public class CustomerLoginSrv extends HttpServlet {
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
-            request.setAttribute("wrongpassword", "true"); // Set wrongpassword attribute
+            request.setAttribute("wrongpassword", "true"); 
         } finally {
-            // Rest of your code remains unchanged
+           
         }
 
         return false;

@@ -87,4 +87,51 @@ public class AppointmentDAO {
 			 }
 			 return count;
 			 }
+	  
+	  //aravindh retrive data of appointment of each vehicle(ID)
+	  public static List<AppointmentBean> getAppointmentByVehicleID(String vehicleID) {
+		    List<AppointmentBean> vechicleappointments = new ArrayList<>();
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        String query = "SELECT  appointmentID, customerID, vehicleID, serviceID, appointmentdate, status FROM appointment WHERE vehicleID = ?;";
+		        
+		        preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setString(1, vehicleID);
+		        resultSet = preparedStatement.executeQuery();
+
+		        while (resultSet.next()) {
+		        	
+		        	AppointmentBean aaa = new AppointmentBean();
+	            	aaa.setAppointmentID(resultSet.getString("appointmentID"));
+	            	aaa.setCustomerID(resultSet.getString("customerID"));
+	            	aaa.setVehicleID(resultSet.getString("vehicleID"));
+	            	aaa.setServiceID(resultSet.getString("serviceID"));
+	            	aaa.setAppointmentdate(resultSet.getString("appointmentdate"));
+	            	aaa.setStatus(resultSet.getString("status"));		            
+	            	vechicleappointments.add(aaa);
+		        }
+		    } catch (Exception e) {
+		        // Handle exceptions
+		        e.printStackTrace();
+		    } finally {
+		        // Close database resources (connection, statement, result set)
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (Exception e) {
+		            // Handle exceptions
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return vechicleappointments;
+		}
+
 }
+
+

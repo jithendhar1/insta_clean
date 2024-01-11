@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.weblabs.beans.AddressBean;
-import com.weblabs.beans.CreateProject;
 import com.weblabs.beans.CustomerBean;
 import com.weblabs.utility.DBUtil;
 
@@ -219,5 +218,47 @@ public class CustomerDAO {
 	        return allProjects;
 	    }
 	  
-	 
+	 //aravindh retrive data of customers By customerID
+	  public static List<CustomerBean> getCustomerProfileByCustomerID(String customerID) {
+		    List<CustomerBean> abc = new ArrayList<>();
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        String query = "SELECT customerID, customername, email, phno, firstname, lastname FROM customer WHERE customerID = ?;";
+		        
+		        preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setString(1, customerID);
+		        resultSet = preparedStatement.executeQuery();
+
+		        while (resultSet.next()) {
+		        	CustomerBean ccc = new CustomerBean();
+		        	ccc.setCustomerID(resultSet.getString("customerID"));
+		        	ccc.setCustomername(resultSet.getString("customername"));
+		        	ccc.setEmail(resultSet.getString("email"));
+		        	ccc.setPhno(resultSet.getString("phno"));
+		        	ccc.setFirstname(resultSet.getString("firstname"));
+		        	ccc.setLastname(resultSet.getString("lastname"));
+		                
+		            abc.add(ccc);
+		        }
+		    } catch (Exception e) {
+		        // Handle exceptions
+		        e.printStackTrace();
+		    } finally {
+		        // Close database resources (connection, statement, result set)
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (Exception e) {
+		            // Handle exceptions
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return abc;
+		}
 }

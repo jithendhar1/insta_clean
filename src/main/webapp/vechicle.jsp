@@ -265,7 +265,7 @@ for (VechicleBean tasks : tax) {
 				 <jsp:include page="delete_task.jsp" />
 				<!-- /Delete Tax Modal --> --%>
 				
-            </div>
+          
 	
 
 		

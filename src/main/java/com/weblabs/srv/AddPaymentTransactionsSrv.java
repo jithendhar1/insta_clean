@@ -9,26 +9,30 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.weblabs.service.impl.VechicleServiceImpl;
 
-@WebServlet("/AddVechicleSrv")
-public class AddVechicleSrv extends HttpServlet {
+import com.weblabs.service.impl.PaymentTransactionsServiceImpl;
+
+@WebServlet("/AddPaymentTransactionsSrv")
+public class AddPaymentTransactionsSrv extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Your existing servlet code here
+       
 
         String status = "Add Failed!";
+        String transactionID = request.getParameter("transactionID");
         String customerID = request.getParameter("customerID");
-        String vehicleType = request.getParameter("vehicleType");
-        String vehicleModel = request.getParameter("vehicleModel");
-        String VIN = request.getParameter("VIN");
-        String brand = request.getParameter("brand");
+        String paymentamount = request.getParameter("paymentamount");
+        String paymentmethod = request.getParameter("paymentmethod");
+        String transactionstatus = request.getParameter("transactionstatus");
+        String datetimestamp = request.getParameter("datetimestamp");
+        String cardholdername = request.getParameter("cardholdername");
+        String maskedcardnumber = request.getParameter("maskedcardnumber");
         
-        VechicleServiceImpl add = new VechicleServiceImpl();
-        status = add.addV(customerID, vehicleType, vehicleModel, VIN,brand);
+        PaymentTransactionsServiceImpl add = new PaymentTransactionsServiceImpl();
+        status = add.addP( transactionID, customerID, paymentamount, paymentmethod, transactionstatus, datetimestamp, cardholdername, maskedcardnumber);
 
         RequestDispatcher rd = request.getRequestDispatcher("vechicle_add.jsp?message=" + status);
         rd.forward(request, response);

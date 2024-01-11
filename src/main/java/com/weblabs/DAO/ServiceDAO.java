@@ -87,4 +87,97 @@ public class ServiceDAO {
 			 }
 			 return count;
 			 }
+	  
+	  public static List<ServiceBean> getAllService() {
+		    List<ServiceBean> allS = new ArrayList<>();
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        String query = "SELECT  serviceID, servicename, description, price, discount, coupons,type FROM service;";
+		        
+		        preparedStatement = connection.prepareStatement(query);
+		        resultSet = preparedStatement.executeQuery();
+
+		        while (resultSet.next()) {
+		        	ServiceBean aa = new ServiceBean();
+		        	aa.setServiceID(resultSet.getString("serviceID"));
+		        	aa.setServicename(resultSet.getString("servicename"));
+		        	aa.setDescription(resultSet.getString("description"));
+		        	aa.setPrice(resultSet.getString("price"));
+		        	aa.setDiscount(resultSet.getString("discount"));
+		        	aa.setCoupons(resultSet.getString("coupons"));
+		            aa.setType(resultSet.getString("type"));
+		            allS.add(aa);
+		        }
+		    } catch (Exception e) {
+		        // Handle exceptions
+		        e.printStackTrace();
+		    } finally {
+		        // Close database resources (connection, statement, result set)
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (Exception e) {
+		            // Handle exceptions
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return allS;
+		}
+	  
+	  
+	  //type (car or bike)
+	  public static List<ServiceBean> getAllService(String type) {
+		    List<ServiceBean> allS = new ArrayList<>();
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        
+		        // Modify the query based on the specified type
+		        String query = "SELECT serviceID, servicename, description, price, discount, coupons, type " +
+		                       "FROM service WHERE type = ?;";
+		        
+		        preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setString(1, type); // Set the type parameter
+		        resultSet = preparedStatement.executeQuery();
+
+		        while (resultSet.next()) {
+		            ServiceBean aa = new ServiceBean();
+		            aa.setServiceID(resultSet.getString("serviceID"));
+		            aa.setServicename(resultSet.getString("servicename"));
+		            aa.setDescription(resultSet.getString("description"));
+		            aa.setPrice(resultSet.getString("price"));
+		            aa.setDiscount(resultSet.getString("discount"));
+		            aa.setCoupons(resultSet.getString("coupons"));
+		            aa.setType(resultSet.getString("type"));
+		            allS.add(aa);
+		        }
+		    } catch (Exception e) {
+		        // Handle exceptions
+		        e.printStackTrace();
+		    } finally {
+		        // Close database resources (connection, statement, result set)
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (Exception e) {
+		            // Handle exceptions
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return allS;
+		}
+
 }
+	  
+

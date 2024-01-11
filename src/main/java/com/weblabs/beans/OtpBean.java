@@ -4,10 +4,10 @@ public class OtpBean {
 
 	
 	private String otpID;
-	private String email;
-	private String customername;
+	private String customeID;
 	private String time;
 	private String otp;
+	
 	
 	public String getOtpID() {
 		return otpID;
@@ -15,17 +15,11 @@ public class OtpBean {
 	public void setOtpID(String otpID) {
 		this.otpID = otpID;
 	}
-	public String getEmail() {
-		return email;
+	public String getCustomeID() {
+		return customeID;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getCustomername() {
-		return customername;
-	}
-	public void setCustomername(String customername) {
-		this.customername = customername;
+	public void setCustomeID(String customeID) {
+		this.customeID = customeID;
 	}
 	public String getTime() {
 		return time;

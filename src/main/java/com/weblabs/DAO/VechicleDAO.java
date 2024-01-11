@@ -62,6 +62,7 @@ public class VechicleDAO {
 	        return FilteredVechicles;
 	        
 	    } 
+	 
 	  public static int totalCount() {
 			 int count = 0;
 			 Connection connection = null;
@@ -86,4 +87,87 @@ public class VechicleDAO {
 			 }
 			 return count;
 			 }
+	  //aravindh retrive list
+	  public static List<VechicleBean> getAllVehicles() {
+		    List<VechicleBean> allVehicles = new ArrayList<>();
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        String query = "SELECT vehicleID, customerID, vehicleType, vehicleModel, VIN, brand FROM vehicle;";
+		        
+		        preparedStatement = connection.prepareStatement(query);
+		        resultSet = preparedStatement.executeQuery();
+
+		        while (resultSet.next()) {
+		            VechicleBean vehicle = new VechicleBean();
+		            vehicle.setVehicleID(resultSet.getString("vehicleID"));
+		            vehicle.setCustomerID(resultSet.getString("customerID"));
+		            vehicle.setVehicleType(resultSet.getString("vehicleType"));
+		            vehicle.setVehicleModel(resultSet.getString("vehicleModel"));
+		            vehicle.setVIN(resultSet.getString("VIN"));
+		            vehicle.setBrand(resultSet.getString("brand"));
+		            allVehicles.add(vehicle);
+		        }
+		    } catch (Exception e) {
+		        // Handle exceptions
+		        e.printStackTrace();
+		    } finally {
+		        // Close database resources (connection, statement, result set)
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (Exception e) {
+		            // Handle exceptions
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return allVehicles;
+		}
+	  //aravindh retrive data of vechicles of each customer
+	  public static List<VechicleBean> getVehiclesByCustomerID(String customerID) {
+		    List<VechicleBean> customerVehicles = new ArrayList<>();
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        String query = "SELECT vehicleID, customerID, vehicleType, vehicleModel, VIN, brand FROM vehicle WHERE customerID = ?;";
+		        
+		        preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setString(1, customerID);
+		        resultSet = preparedStatement.executeQuery();
+
+		        while (resultSet.next()) {
+		            VechicleBean vehicle = new VechicleBean();
+		            vehicle.setVehicleID(resultSet.getString("vehicleID"));
+		            vehicle.setCustomerID(resultSet.getString("customerID"));
+		            vehicle.setVehicleType(resultSet.getString("vehicleType"));
+		            vehicle.setVehicleModel(resultSet.getString("vehicleModel"));
+		            vehicle.setVIN(resultSet.getString("VIN"));
+		            vehicle.setBrand(resultSet.getString("brand"));
+		            customerVehicles.add(vehicle);
+		        }
+		    } catch (Exception e) {
+		        // Handle exceptions
+		        e.printStackTrace();
+		    } finally {
+		        // Close database resources (connection, statement, result set)
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (Exception e) {
+		            // Handle exceptions
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return customerVehicles;
+		}
 }
