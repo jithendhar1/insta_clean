@@ -25,12 +25,8 @@
     <div class="main-wrapper">
         <div class="account-content">
             <div class="container">
-                <!-- Account Logo -->
-                <div class="account-logo">
-                   <!--  <a href="admin_dashboard.jsp"><img src="assets/logo2.png" alt="Company Logo"></a> -->
-                   <a href="invoice.jsp"><img src="assets/logo2.png" alt="Company Logo"></a>
-                </div>
-                <!-- /Account Logo -->
+              
+                
                 <div class="account-box">
                     <div class="account-wrapper">
                         <h3 class="account-title"> Login</h3>
@@ -38,8 +34,8 @@
                         <!-- <form method="post" action="./CustomerLoginSrv"> -->
                          <form method="post" action="./LoginSrv"> 
                             <div class="form-group">
-                                <label>User Name</label>
-                                <input class="form-control" id="username"  name="username" required type="text">
+                                <label>phno</label>
+                                <input class="form-control" id="phno"  name="phno" required type="text">
                             </div>
                             <% if (request.getAttribute("wrongusername") != null) { %>
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -52,10 +48,10 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
-                                        <label>Password</label>
+                                        <label>otp</label>
                                     </div>
                                 </div>
-                                <input class="form-control" id="password" name="password" required type="password">
+                                <input class="form-control" id="otp" name="otp" required type="text">
                                
                             </div>
                             <% if (request.getAttribute("wrongpassword") != null) { %>
@@ -87,10 +83,10 @@
     <script>
     function validateLogin() {
         // Get the input values
-        var username = document.getElementById('username').value;
+        var username = document.getElementById('phno').value;
         console.log("Username: " + username);
 
-        var password = document.getElementById('password').value;
+        var password = document.getElementById('otp').value;
 
         // Check if username and password match certain criteria (you can replace this with your validation logic)
         if (username === 'correctUsername' && password === 'correctPassword') {

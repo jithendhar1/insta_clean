@@ -1,3 +1,4 @@
+
 package com.weblabs.srv;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -5,23 +6,34 @@ import com.twilio.type.PhoneNumber;
 
 public class TwilloSrv {
 
-    private static final String TWILIO_ACCOUNT_SID = "AC680a943a65d756365f73c7b69ea04d69";
-    private static final String TWILIO_AUTH_TOKEN = "f3f437927b61ebe0fa0b5884bd92d42d";
-    private static final String TWILIO_PHONE_NUMBER = "+16166362291";
+    private static final String TWILIO_ACCOUNT_SID = "";
+    private static final String TWILIO_AUTH_TOKEN = "";
+    private static final String TWILIO_PHONE_NUMBER = "+";
 
     public void sendOtp(String phno, String otp) {
         String number = phno;
         String otpText = otp;  // Define your OTP message here
 
         try {
-            Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+			/*
+			 * Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+			 * 
+			 * // Send SMS Message message = Message.creator( new PhoneNumber(number), new
+			 * PhoneNumber(TWILIO_PHONE_NUMBER), otpText ).create();
+			 */
+            
+            
+            
+        	Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+    	    Message message = Message.creator(
+    	      new com.twilio.type.PhoneNumber("whatsapp:+"),
+    	      new com.twilio.type.PhoneNumber("whatsapp:+"),
+    	     " otpText"
 
-            // Send SMS
-            Message message = Message.creator(
-                    new PhoneNumber(number),
-                    new PhoneNumber(TWILIO_PHONE_NUMBER),
-                    otpText
-            ).create();
+    	    ).create();   
+            
+            
+            
 
             // Log the SID of the message
             System.out.println("SMS sent successfully. SID: " + message.getSid());

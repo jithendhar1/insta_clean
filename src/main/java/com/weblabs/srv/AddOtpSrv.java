@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.weblabs.service.impl.OtpServiceImpl;
 import com.weblabs.utility.DBUtil;
 import java.time.LocalTime;
+import java.security.SecureRandom;
+
 @WebServlet("/AddOtpSrv")
 public class AddOtpSrv extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -22,13 +24,18 @@ public class AddOtpSrv extends HttpServlet {
             throws ServletException, IOException {
     	   	
         String phno = request.getParameter("phno");
-        String otp = request.getParameter("otp");
-      //  String time = request.getParameter("time");
+        //String otp = request.getParameter("otp");
+        OTPGenerator otp1 = new OTPGenerator();
+        String otp = otp1.generateOTP();
+        
         LocalTime currentTime = LocalTime.now();
         String time = currentTime.toString();
         
-         TwilloSrv tv = new TwilloSrv();
-         tv.sendOtp(phno, otp);
+        
+        
+        
+     TwilloSrv tv = new TwilloSrv();
+      tv.sendOtp(phno, otp);
       
         
         Connection con = null;
@@ -85,7 +92,13 @@ public class AddOtpSrv extends HttpServlet {
             preparedStatement.setString(1, customerID);
             resultSet = preparedStatement.executeQuery();
 
-            return true; // If there is a matching customerID, return true
+            if(resultSet.next()) {
+                // If there is a matching customerID, return true
+                return true;
+            } else {
+                // If there is no matching customerID, return false
+                return false;
+            }
 
         } catch (SQLException e) {
             // Handle SQL exceptions
@@ -94,16 +107,12 @@ public class AddOtpSrv extends HttpServlet {
             // Handle other exceptions
             e.printStackTrace();
         } finally {
-            // Close database resources (connection, statement, result set)
+            // Close resources in a finally block to ensure they are closed
             try {
                 if (resultSet != null) resultSet.close();
                 if (preparedStatement != null) preparedStatement.close();
                 if (connection != null) connection.close();
             } catch (SQLException e) {
-                // Handle SQL exceptions
-                e.printStackTrace();
-            } catch (Exception e) {
-                // Handle other exceptions
                 e.printStackTrace();
             }
         }
@@ -116,4 +125,12 @@ public class AddOtpSrv extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.write(status);
     }
+    
+    
+   
+
 }
+
+
+
+
