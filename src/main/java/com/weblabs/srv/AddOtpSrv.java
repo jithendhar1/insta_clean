@@ -34,7 +34,7 @@ public class AddOtpSrv extends HttpServlet {
         
         
         
-     TwilloSrv tv = new TwilloSrv();
+        Twilio1Srv tv = new Twilio1Srv();
       tv.sendOtp(phno, otp);
       
         

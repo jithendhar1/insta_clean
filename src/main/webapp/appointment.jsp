@@ -6,6 +6,14 @@
 <%@page import="com.weblabs.DAO.AppointmentDAO"%>
 <%@page import="com.weblabs.DAO.CustomerDAO"%>
 <%@ page import="com.weblabs.beans.CustomerBean" %>
+<%
+   // Retrieve VIN from the URL parameter
+/* String customerID = request.getParameter("customerID"); */
+ String customerID = (String) session.getAttribute("customerID");
+//String a[] = request.getParameterValues("selectedServices");
+//for (String value : a) {
+
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -103,7 +111,7 @@ if (newRecordsPerPageParam != null) {
 						<div class="row align-items-center">
 							<div class="col">
 							<div id="welcomeMessage" style="text-align: center; margin-top: 20px; font-size: 24px;">
-                                Welcome 
+                                Welcome <%= customerID%>!
                               </div>
 								<h3 class="page-title">appointment</h3>
 							</div>

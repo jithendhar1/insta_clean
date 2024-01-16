@@ -6,9 +6,18 @@
 <%@page import="com.weblabs.DAO.ServiceDAO"%>
 <%@page import="com.weblabs.DAO.CustomerDAO"%>
 <%@ page import="com.weblabs.beans.CustomerBean" %>
-<%
+<%-- <%
     // Getting the username from the session
-    String username = (String)session.getAttribute("customername");
+    String username = (String)session.getAttribute("VIN");
+%> --%>
+
+<%
+   // Retrieve VIN from the URL parameter
+   String VIN = request.getParameter("VIN");
+
+   // Store VIN in the session
+  session.setAttribute("currentVIN", VIN);
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,7 +116,7 @@ if (newRecordsPerPageParam != null) {
 						<div class="row align-items-center">
 							<div class="col">
 							<div id="welcomeMessage" style="text-align: center; margin-top: 20px; font-size: 24px;">
-                                Welcome <%= username%>! 
+                                Welcome <%= VIN%>! 
                               </div>
 								<h3 class="page-title">Services</h3>
 								<!-- <ul class="breadcrumb">
@@ -122,7 +131,7 @@ if (newRecordsPerPageParam != null) {
 					</div>
 					<!-- /Page Header -->
 					<!-- Search Filter -->
-					<form action="./SearchServiceSrv" method="post">
+					<!-- <form action="./SearchServiceSrv" method="post"> -->
     <div class="row filter-row">
         <div class="col-sm-6 col-md-3">
             <div class="form-group form-focus select-focus">
@@ -148,7 +157,8 @@ if (newRecordsPerPageParam != null) {
         </select>
         
     </div>
-</form>
+<!-- </form> -->
+ <form action="booking.jsp" method="post">
 								<table>
 									<thead>
 										<tr>
@@ -211,7 +221,8 @@ for (ServiceBean tasks : tax) {
 	//CustomerBean pro = CustomerDAO.getCustomerById(tasks.getCustomerID()); 
 %>
 <tr>
-    <td><%=tasks.getServiceID() %></td>
+<td><input type="checkbox" name="selectedServices" value="<%= tasks.getServiceID() %>"> </td>
+    <%-- <td><%=tasks.getServiceID() %></td> --%>
     <td><%=tasks.getServicename() %></td>  
     <td><%=tasks.getDescription() %></td>
     <td><%=tasks.getPrice() %></td>
@@ -231,6 +242,14 @@ for (ServiceBean tasks : tax) {
 %>
 
 								</table>
+								<!--  <input  href="appointment.jsp" type="submit" value="Book Appointment"> -->
+								 <button type="submit" onclick="window.location.href='booking.jsp'">Book Appointment</button>
+								<!-- <input  type="submit" value="Book Appointment"> -->
+								
+								<!-- <a href="appointment.jsp" class="btn">Book Appointment</a> -->
+								
+    </form>
+      
 <div class="row justify-content-center align-items-center" id = "flag1">
    
    <!-- Pagination links -->
@@ -251,9 +270,10 @@ for (ServiceBean tasks : tax) {
         <a href="service.jsp?page=<%=pageno + 1%>">Next</a>
     <% } %>
 
-</div>
+</div></form>
 							</div>
 						</div>
+						
 					</div>
                
 				<!-- /Page Content -->
@@ -262,7 +282,7 @@ for (ServiceBean tasks : tax) {
 				 <jsp:include page="service_add.jsp" />
 			
 				
-            </div>
+             </div>
 	
 
 		

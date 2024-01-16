@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
-import com.weblabs.DAO.VechicleDAO;
-import com.weblabs.beans.VechicleBean;
+import com.weblabs.DAO.AddressDAO;
+import com.weblabs.beans.AddressBean;
 
-@WebServlet("/DAOVechicleCIDSrv")
-public class DAOVechicleCIDSrv extends HttpServlet {
+@WebServlet("/DAOAddressCIDSrv")
+public class DAOAddressCIDSrv extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,11 +26,11 @@ public class DAOVechicleCIDSrv extends HttpServlet {
         String customerID = request.getParameter("customerID");
     
         // Your existing servlet code here
-        List<VechicleBean> allVehicles = getVechcile(customerID);
+        List<AddressBean> alladdresses = getAddress(customerID);
 
        
         // Convert the list to JSON
-        String jsonResponse = new Gson().toJson(allVehicles);
+        String jsonResponse = new Gson().toJson(alladdresses);
 
         // Set the content type and write the JSON response
         response.setContentType("application/json");
@@ -39,9 +39,9 @@ public class DAOVechicleCIDSrv extends HttpServlet {
 
   
 
-    public List<VechicleBean> getVechcile(String customerID) {
-        List<VechicleBean> allVehicles = VechicleDAO.getVehiclesByCustomerID(customerID);
-        return allVehicles;
+    public List<AddressBean> getAddress(String customerID) {
+        List<AddressBean> alladds = AddressDAO.getAddressByCustomerID(customerID);
+        return alladds;
     }
 
     

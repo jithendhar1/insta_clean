@@ -11,7 +11,7 @@ public class AppointmentServiceImp {
 	
 	//appointmentID, customerID, vehicleID, serviceID, appointmentdate, status
 	
-	public String addA(String customerID,String vehicleID,String serviceID,String appointmentdate,String status) {
+	public String addA(String customerID,String vehicleID,String serviceID,String appointmentdate,String appointmenttime,String status) {
 		
 		String Status1 = " Adding Failed!";
 
@@ -19,12 +19,13 @@ public class AppointmentServiceImp {
         PreparedStatement ps = null;
 
         try {
-        	ps = con.prepareStatement("INSERT INTO appointment (customerID, vehicleID, serviceID, appointmentdate, status) VALUES (?,?,?,?,?)");
+        	ps = con.prepareStatement("INSERT INTO appointment (customerID, vehicleID, serviceID, appointmentdate,appointmenttime, status) VALUES (?,?,?,?,?,?)");
         	ps.setString(1, customerID);
         	ps.setString(2, vehicleID);
             ps.setString(3, serviceID);
             ps.setString(4, appointmentdate);
-            ps.setString(5, status);
+            ps.setString(5, appointmenttime);
+            ps.setString(6, status);
           
            
             int k = ps.executeUpdate();
@@ -44,7 +45,7 @@ public class AppointmentServiceImp {
 	}
 	
 	
-	public String editA(String appointmentID,String customerID,String vehicleID,String serviceID,String appointmentdate,String status)  {
+	public String editA(String appointmentID,String customerID,String vehicleID,String serviceID,String appointmentdate,String appointmenttime,String status)  {
 		
 			String Status3 = "Updating  Failed!";
 
@@ -52,14 +53,15 @@ public class AppointmentServiceImp {
 	        PreparedStatement ps = null;
 
 	        try {
-	        	ps = con.prepareStatement("UPDATE appointment SET customerID= ?, vehicleID= ?, serviceID= ?, appointmentdate= ?, status= ? WHERE appointmentID = ?");
+	        	ps = con.prepareStatement("UPDATE appointment SET customerID= ?, vehicleID= ?, serviceID= ?, appointmentdate= ?,appointmenttime=?, status= ? WHERE appointmentID = ?");
 	        	
 	        	ps.setString(1, customerID);
 	        	ps.setString(2, vehicleID);
 	            ps.setString(3, serviceID);
 	            ps.setString(4, appointmentdate);
-	            ps.setString(5, status);
-	            ps.setString(6, appointmentID);
+	            ps.setString(5, appointmenttime);
+	            ps.setString(6, status);
+	            ps.setString(7, appointmentID);
 	           
 	            int k = ps.executeUpdate();
 

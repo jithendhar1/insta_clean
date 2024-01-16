@@ -8,8 +8,8 @@ public class AppointmentBean {
 	private String vehicleID;
 	private String serviceID;
 	private String appointmentdate;
+	private String appointmenttime;
 	private String status;
-	
 	
 	public String getAppointmentID() {
 		return appointmentID;
@@ -41,12 +41,19 @@ public class AppointmentBean {
 	public void setAppointmentdate(String appointmentdate) {
 		this.appointmentdate = appointmentdate;
 	}
+	public String getAppointmenttime() {
+		return appointmenttime;
+	}
+	public void setAppointmenttime(String appointmenttime) {
+		this.appointmenttime = appointmenttime;
+	}
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 	
 	
 }

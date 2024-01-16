@@ -18,7 +18,32 @@
     <param-value>yourValue</param-value>
 </context-param>
     <!-- Define Servlets and Servlet Mappings -->
+    
+    
+    
     <servlet>
+    <servlet-name>AddVechicleSrv</servlet-name>
+    <servlet-class>com.weblabs.srv.AddVechicleSrv</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>AddVechicleSrv</servlet-name>
+    <url-pattern>/AddVechicleSrv</url-pattern>
+</servlet-mapping>
+    
+    
+    
+ <filter>
+    <filter-name>CORSFilter</filter-name>
+    <filter-class>com.example.CORSFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>CORSFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+    
+    
+    
+<!--     <servlet>
         <servlet-name>AddEmployeeSrv</servlet-name>
         <servlet-class>com.weblabs.srv.AddEmployeeSrv</servlet-class>
     </servlet>   
@@ -34,7 +59,7 @@
         <servlet-name>SetSessionAttributeServlet</servlet-name>
         <url-pattern>/SetSessionAttributeServlet</url-pattern>
     </servlet-mapping>
-
+ -->
 
 
 <context-param>
@@ -42,6 +67,19 @@
     <param-value>2.8.8</param-value>
 </context-param>
 
+<!-- <FileList
+  DisplayName = "Universal Windows"
+  PlatformIdentity = "UAP, Version=10.0.22621.0"      
+  TargetFramework = ".NETCore,version=v4.5.3;.NETFramework,version=v4.5.3"
+  MinVSVersion = "14.0"
+  MinOSVersion = "6.1"
+  MaxOSVersionTested = "10.0"
+  UnsupportedDowntarget = "Windows, version=8.1">
+
+  <File Reference = "Windows">
+    <ToolboxItems VSCategory = "Toolbox.Default"/>
+  </File>
+</FileList> -->
 
 </web-app>
 

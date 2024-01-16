@@ -11,7 +11,14 @@ public class ServiceBean {
 	private String discount;
 	private String coupons;
 	private String type;
+	private String timetakes;
 	
+	public String getTimetakes() {
+		return timetakes;
+	}
+	public void setTimetakes(String timetakes) {
+		this.timetakes = timetakes;
+	}
 	public String getServiceID() {
 		return serviceID;
 	}

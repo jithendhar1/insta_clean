@@ -6,9 +6,9 @@ import com.twilio.type.PhoneNumber;
 
 public class TwilloSrv {
 
-    private static final String TWILIO_ACCOUNT_SID = "";
-    private static final String TWILIO_AUTH_TOKEN = "";
-    private static final String TWILIO_PHONE_NUMBER = "+";
+    private static final String TWILIO_ACCOUNT_SID = "AC680a943a65d756365f73c7b69ea04d69";
+    private static final String TWILIO_AUTH_TOKEN = "6084ae70cd635d8981b9d752b6e8cff2";
+    private static final String TWILIO_PHONE_NUMBER = "+161663622918";
 
     public void sendOtp(String phno, String otp) {
         String number = phno;
@@ -26,9 +26,9 @@ public class TwilloSrv {
             
         	Twilio.init(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
     	    Message message = Message.creator(
-    	      new com.twilio.type.PhoneNumber("whatsapp:+"),
-    	      new com.twilio.type.PhoneNumber("whatsapp:+"),
-    	     " otpText"
+    	      new com.twilio.type.PhoneNumber("whatsapp:+919390541846"),
+    	      new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),
+    	     " otpText fffffffffffffff"
 
     	    ).create();   
             

@@ -1,9 +1,16 @@
+<%
+    // Getting the username from the session
+   
+     String customerID = (String) session.getAttribute("customerID");
+  //  String username = "customerID";
+%>
+
 <form action="./AddVechicleSrv" method="post">
 <div id="addvechicle" class="modal custom-modal fade" role="dialog">
     <div class="col-md-6">
         <div class="form-group">
             <label for="customerID">Customer ID <span class="text-danger">*</span></label>
-            <input id="customerID" name="customerID" class="form-control" type="text">
+            <input id="customerID" name="customerID" class="form-control" type="hidden">
         </div>
     </div>
 

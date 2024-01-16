@@ -25,11 +25,12 @@ public class AddAppointmentSrv  extends HttpServlet {
 	        String vehicleID = request.getParameter("vehicleID");
 	        String serviceID = request.getParameter("serviceID");
 	        String appointmentdate = request.getParameter("appointmentdate"); 
+	        String appointmenttime = request.getParameter("appointmenttime"); 
 	        String status = request.getParameter("status");
 	       
 	      
 	        AppointmentServiceImp add =new AppointmentServiceImp();
-	        status1=add.addA(customerID, vehicleID, serviceID, appointmentdate,status);
+	        status1=add.addA(customerID, vehicleID, serviceID, appointmentdate,appointmenttime,status);
 	  	  
 	    		   RequestDispatcher rd = request.getRequestDispatcher("add_appointment.jsp?message=" + status1);
 	       rd.forward(request, response);

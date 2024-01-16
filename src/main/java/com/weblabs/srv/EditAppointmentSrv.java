@@ -28,6 +28,7 @@ public class EditAppointmentSrv extends HttpServlet {
         String vehicleID = request.getParameter("vehicleID");
         String serviceID = request.getParameter("serviceID");
         String appointmentdate = request.getParameter("appointmentdate");
+        String appointmenttime = request.getParameter("appointmenttime");
         String status = request.getParameter("status");
         
         AppointmentBean dept = new AppointmentBean();
@@ -37,12 +38,13 @@ public class EditAppointmentSrv extends HttpServlet {
         dept.setVehicleID(vehicleID);
         dept.setServiceID(serviceID);
         dept.setAppointmentdate(appointmentdate);
+        dept.setAppointmenttime(appointmenttime);
         dept.setStatus(status);
         //dept.setAppointmentID(appointmentID);
         
         AppointmentServiceImp dao = new AppointmentServiceImp();
    
-        String status2 = dao.editA(appointmentID,customerID, vehicleID, serviceID, appointmentdate, status);
+        String status2 = dao.editA(appointmentID,customerID, vehicleID, serviceID, appointmentdate,appointmenttime, status);
 
         RequestDispatcher rd = request.getRequestDispatcher("appointment_edit.jsp?message=" + status2);
         rd.forward(request, response);
