@@ -23,7 +23,7 @@ public class SearchAppointmentSrv extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
-    	String vechicleFilter = request.getParameter("supplierName");
+    	String vechicleFilter = request.getParameter("appointmentdate");
         String idFilter = request.getParameter("appointmentID");
   
 
@@ -44,7 +44,7 @@ public class SearchAppointmentSrv extends HttpServlet {
          
       	if (idFilter == null || idFilter.isEmpty()) {
       	 int idFilterInt = 0;
-      	suppliers = AppointmentDAO.getFilteredAppointment("appointmentID like '%" + vechicleFilter + "%' or appointmentID = '" + idFilterInt + "'", start, limit);
+      	suppliers = AppointmentDAO.getFilteredAppointment("appointmentdate like '%" + vechicleFilter + "%' or appointmentdate = '" + idFilterInt + "'", start, limit);
       	}
       	else {
       		suppliers = AppointmentDAO.getFilteredAppointment("appointmentID like '%" + vechicleFilter + "%' and appointmentID = '" + idFilter + "'", start, limit);

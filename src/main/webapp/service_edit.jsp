@@ -123,9 +123,9 @@
         response.sendRedirect("service.jsp");
     } else {
 %>
-   <div class="col-sm-6">
+   <!-- <div class="col-sm-6">
         <p>Task not found with the provided ID.</p>
-   </div>
+   </div> -->
 <%
     }}}
 %>

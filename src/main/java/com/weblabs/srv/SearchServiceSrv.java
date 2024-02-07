@@ -23,7 +23,7 @@ public class SearchServiceSrv extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
-    	String vechicleFilter = request.getParameter("supplierName");
+    	String vechicleFilter = request.getParameter("servicename");
         String idFilter = request.getParameter("serviceID");
   
 
@@ -44,7 +44,7 @@ public class SearchServiceSrv extends HttpServlet {
          
       	if (idFilter == null || idFilter.isEmpty()) {
       	 int idFilterInt = 0;
-      	suppliers = ServiceDAO.getFilteredServices("serviceID like '%" + vechicleFilter + "%' or serviceID = '" + idFilterInt + "'", start, limit);
+      	suppliers = ServiceDAO.getFilteredServices("servicename like '%" + vechicleFilter + "%' or servicename = '" + idFilterInt + "'", start, limit);
       	}
       	else {
       		suppliers = ServiceDAO.getFilteredServices("serviceID like '%" + vechicleFilter + "%' and serviceID = '" + idFilter + "'", start, limit);

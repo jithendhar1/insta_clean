@@ -37,12 +37,7 @@
 <body>
 	<!-- Main Wrapper -->
         <div class="main-wrapper">
-		
-			<!-- Header -->
-          
-			<!-- /Header -->
-			
-			<!-- Sidebar -->
+		 <jsp:include page="header.jsp" />
             <jsp:include page="sidebar.jsp" />
 			<!-- /Sidebar -->
 			
@@ -91,7 +86,7 @@
 								
 									<%-- 		        <input type="text" id="companyName" name="companyName" value="<%= company.getCompanyName() %>"> value="<%= companyName %>">  --%>
 									<input class="form-control" type="hidden" name="aboutID" value="<%= (company != null) ? company.getAboutID() : "" %>">   
-											<input class="form-control" type="text" name="title" value="<%= (company != null) ? company.getTitle() : "" %>" oninput="checkInput()">   
+											<input class="form-control" readonly type="text" name="title" value="<%= (company != null) ? company.getTitle() : "" %>" oninput="checkInput()">   
 										</div>
 									</div>
 									</div>
@@ -113,7 +108,7 @@
 							</form>
  
 </div></div>
-
+  </div>
   <script>
     function setAction(action) {
         var form = document.getElementById('myForm');
@@ -162,8 +157,7 @@
 		<script src="js/jquery.dataTables.min.js"></script>
 		<script src="js/dataTables.bootstrap4.min.js"></script>
 
-		<!-- Custom JS -->
-		<script src="js/app.js"></script>
+		
 
          
 </body>

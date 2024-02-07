@@ -14,7 +14,7 @@
 	  String roleIDString = (String) sdsession.getAttribute("RoleID");
     // Check if the user is logged in or redirect to the login page
     if (roleIDString == null) {
-        response.sendRedirect("login.jsp"); // Change "login.jsp" to your actual login page
+        response.sendRedirect("admin_dashboard.jsp"); // Change "login.jsp" to your actual login page
     } else {
     	   int roleid = Integer.parseInt(roleIDString);
 
@@ -80,7 +80,6 @@
                             </a>
                             <ul style="display: none;">
                                 <li><a href="admin_dashboard.jsp">Admin Dashboard</a></li>
-                                <!-- <li><a href="employee_dashboard.jsp">User Dashboard</a></li> -->
                             </ul>
                         </li>
                         <li class="menu-title">

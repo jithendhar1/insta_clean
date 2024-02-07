@@ -170,4 +170,48 @@ public class VechicleDAO {
 
 		    return customerVehicles;
 		}
+	  // retrive data of vechicles of each customer with vechicle type
+	  public static List<VechicleBean> getVehiclesByCustomerIDAndVehicleType(String customerID, String vehicleType) {
+		    List<VechicleBean> customerVehicles = new ArrayList<>();
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        String query = "SELECT vehicleID, customerID, vehicleType, vehicleModel, VIN, brand FROM vehicle WHERE customerID = ? AND vehicleType = ?";
+		        
+		        preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setString(1, customerID);
+		        preparedStatement.setString(2, vehicleType);
+		        resultSet = preparedStatement.executeQuery();
+
+		        while (resultSet.next()) {
+		            VechicleBean vehicle = new VechicleBean();
+		            vehicle.setVehicleID(resultSet.getString("vehicleID"));
+		            vehicle.setCustomerID(resultSet.getString("customerID"));
+		            vehicle.setVehicleType(resultSet.getString("vehicleType"));
+		            vehicle.setVehicleModel(resultSet.getString("vehicleModel"));
+		            vehicle.setVIN(resultSet.getString("VIN"));
+		            vehicle.setBrand(resultSet.getString("brand"));
+		            customerVehicles.add(vehicle);
+		        }
+		    } catch (Exception e) {
+		        // Handle exceptions
+		        e.printStackTrace();
+		    } finally {
+		        // Close database resources (connection, statement, result set)
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (Exception e) {
+		            // Handle exceptions
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return customerVehicles;
+		}
+
 }

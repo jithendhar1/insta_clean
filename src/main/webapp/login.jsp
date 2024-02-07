@@ -30,8 +30,9 @@
                 <div class="account-box">
                     <div class="account-wrapper">
                         <h3 class="account-title"> Login</h3>
-                        <!-- Account Form -->
-                        <!-- <form method="post" action="./CustomerLoginSrv"> -->
+                                
+                        
+                        
                          <form method="post" action="./LoginSrv"> 
                             <div class="form-group">
                                 <label>phno</label>
@@ -45,6 +46,7 @@
                                     </button>
                                 </div>
                             <% } %>
+                            
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
@@ -72,13 +74,13 @@
                                 <p>Having Trouble? report an issue on GitHub <a target="_blank" href="https://github.com/MusheAbdulHakim/Smarthr---hr-payroll-project-employee-management-System/issues">GitHub issues</a></p>
                             </div> -->
                         </form>
-                        <!-- /Account Form -->
+                       
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Main Wrapper -->
+   
     
     <script>
     function validateLogin() {
@@ -105,6 +107,6 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- Custom JS -->
-    <script src="js/app.js"></script>
+
 </body>
 </html>

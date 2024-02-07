@@ -92,7 +92,7 @@ if (newRecordsPerPageParam != null) {
 
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
-		
+		 <jsp:include page="header.jsp" />
 		<jsp:include page="sidebar.jsp" />
             <div class="page-wrapper">
 			
@@ -113,13 +113,14 @@ if (newRecordsPerPageParam != null) {
 								</ul> -->
 							</div>
 							<div class="col-auto float-right ml-auto">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#addvechicle"><i class="fa fa-plus"></i> Add Vechicle</a>
+						<!-- 	<a href="#" class="btn add-btn" data-toggle="modal" data-target="#addvechicle"><i class="fa fa-plus"></i> Add Vechicle</a> -->
 							</div>
 						</div>
 					</div>
-					<!-- /Page Header -->
-					<!-- Search Filter -->
-					<form action="./SearchVechicleSrv" method="post">
+				
+				
+				
+				<%-- 	<form action="./SearchVechicleSrv" method="post">
     <div class="row filter-row">
         <div class="col-sm-6 col-md-3">
             <div class="form-group form-focus select-focus">
@@ -144,7 +145,9 @@ if (newRecordsPerPageParam != null) {
         </select>
         
     </div>
-</form>
+</form> --%>
+
+
 								<table>
 									<thead>
 										<tr>
@@ -155,8 +158,8 @@ if (newRecordsPerPageParam != null) {
 									        <th>vehicleModel</th>
 									        <th>VIN</th>
 									        <th>brand</th>
-									        <th>Edit</th>
-									         <th>Delete</th>    
+									       <th>Edit</th>
+									        <!--   <th>Delete</th>   -->  
 										</tr>
 									</thead>
 <%
@@ -216,10 +219,10 @@ for (VechicleBean tasks : tax) {
     <td>
         <a href="vechicle_edit.jsp?vehicleID=<%= tasks.getVehicleID() %>">Edit</a>
     </td>
-    <td>
-<%--          <a href="delete_task.jsp?id=<%= tasks.getTask_id() %>">Delete</a>  --%>
+    <%-- <td>
+         <a href="delete_task.jsp?id=<%= tasks.getTask_id() %>">Delete</a> 
         <a href="DeleteVechicleSrv?VehicleID=<%= tasks.getVehicleID() %>">Delete</a> 
-    </td>
+    </td> --%>
 </tr>
 <%
 }
@@ -255,18 +258,7 @@ for (VechicleBean tasks : tax) {
 				
 				<!-- Add Tax Modal -->
 				 <jsp:include page="vechicle_add.jsp" />
-				<!-- /Add Tax Modal -->
-				
-				<%-- <!-- Edit Tax Modal -->
-				 <jsp:include page="edit_tasks.jsp" />
-				<!-- /Edit Tax Modal -->
-				
-				<!-- Delete Tax Modal -->
-				 <jsp:include page="delete_task.jsp" />
-				<!-- /Delete Tax Modal --> --%>
-				
-          
-	
+			
 
 		
         <script src="js/jquery-3.2.1.min.js"></script>
@@ -281,8 +273,7 @@ for (VechicleBean tasks : tax) {
 		
 		<script src="js/select2.min.js"></script>
 
-		
-		<script src="js/app.js"></script>
+
 
 
     </body>

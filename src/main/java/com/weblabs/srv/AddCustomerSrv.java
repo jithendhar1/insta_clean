@@ -33,7 +33,12 @@ public class AddCustomerSrv extends HttpServlet {
             String phno = request.getParameter("phno");
             String firstname = request.getParameter("firstname");
             String lastname = request.getParameter("lastname");
-
+            String RoleID = request.getParameter("RoleID");
+            if (RoleID == null) {
+                // If null, set RoleID to "2"
+                RoleID = "2";
+            }
+            
             String[] street = request.getParameterValues("street");
             String[] city = request.getParameterValues("city");
             String[] postal_code = request.getParameterValues("postal_code");
@@ -51,8 +56,8 @@ public class AddCustomerSrv extends HttpServlet {
                 } else {
                     // Continue with the registration process
                     PreparedStatement customerStatement = conn.prepareStatement(
-                            "INSERT INTO customer (customername, email, phno, firstname, lastname) " +
-                                    "VALUES (?, ?, ?, ?, ?)",
+                            "INSERT INTO customer (customername, email, phno, firstname, lastname,RoleID) " +
+                                    "VALUES (?, ?, ?, ?, ?,?)",
                             PreparedStatement.RETURN_GENERATED_KEYS
                     );
 
@@ -62,7 +67,7 @@ public class AddCustomerSrv extends HttpServlet {
                     customerStatement.setString(3, phno);
                     customerStatement.setString(4, firstname);
                     customerStatement.setString(5, lastname);
-
+                    customerStatement.setString(6, RoleID);
                     int affectedRows = customerStatement.executeUpdate();
 
                     if (affectedRows > 0) {

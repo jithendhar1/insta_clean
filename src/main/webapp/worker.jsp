@@ -92,7 +92,7 @@ if (newRecordsPerPageParam != null) {
 
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
-		
+		 <jsp:include page="header.jsp" />
 		<jsp:include page="sidebar.jsp" />
             <div class="page-wrapper">
 			
@@ -119,7 +119,7 @@ if (newRecordsPerPageParam != null) {
 					</div>
 					<!-- /Page Header -->
 					<!-- Search Filter -->
-					<form action="./SearchWorkerSrv" method="post">
+					<%-- <form action="./SearchWorkerSrv" method="post">
     <div class="row filter-row">
         <div class="col-sm-6 col-md-3">
             <div class="form-group form-focus select-focus">
@@ -144,7 +144,7 @@ if (newRecordsPerPageParam != null) {
         </select>
         
     </div>
-</form>
+</form> --%>
 								<table>
 									<thead>
 										<tr>
@@ -272,7 +272,7 @@ for (WorkerBean tasks : tax) {
 		<script src="js/select2.min.js"></script>
 
 		
-		<script src="js/app.js"></script>
+		<!-- <script src="js/app.js"></script> -->
 
 
     </body>

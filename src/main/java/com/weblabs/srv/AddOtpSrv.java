@@ -15,7 +15,8 @@ import com.weblabs.service.impl.OtpServiceImpl;
 import com.weblabs.utility.DBUtil;
 import java.time.LocalTime;
 import java.security.SecureRandom;
-
+import javax.servlet.RequestDispatcher;
+import com.weblabs.DAO.CustomerDAO;
 @WebServlet("/AddOtpSrv")
 public class AddOtpSrv extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -32,10 +33,13 @@ public class AddOtpSrv extends HttpServlet {
         String time = currentTime.toString();
         
         
+        String email = CustomerDAO.getEmailByPhoneNumber(phno);
         
+        EmailEnquiryServlet emailsrv = new EmailEnquiryServlet();
+        emailsrv.sendEmail(email, otp);
         
-        Twilio1Srv tv = new Twilio1Srv();
-      tv.sendOtp(phno, otp);
+        TwilloSrv tv = new TwilloSrv();
+        tv.sendOtp(phno, otp);
       
         
         Connection con = null;
@@ -76,8 +80,9 @@ public class AddOtpSrv extends HttpServlet {
         	 DBUtil.closeConnection(con);
              DBUtil.closeConnection(ps);// Close both connection and PreparedStatement
         }
+        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+        rd.forward(request, response);
     }
-    
 
     private boolean customerIDExists(String customerID) {
         Connection connection = null;
@@ -95,6 +100,7 @@ public class AddOtpSrv extends HttpServlet {
             if(resultSet.next()) {
                 // If there is a matching customerID, return true
                 return true;
+                
             } else {
                 // If there is no matching customerID, return false
                 return false;
@@ -119,7 +125,7 @@ public class AddOtpSrv extends HttpServlet {
 
         return false; // If an exception occurs, return false
     }
-
+    
     private void sendResponse(HttpServletResponse response, String status) throws IOException {
         response.setContentType("text/plain");
         PrintWriter out = response.getWriter();
@@ -130,7 +136,3 @@ public class AddOtpSrv extends HttpServlet {
    
 
 }
-
-
-
-

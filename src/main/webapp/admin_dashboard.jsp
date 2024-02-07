@@ -45,7 +45,7 @@
 <body>
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-
+ <jsp:include page="header.jsp" />
     
           <jsp:include page="sidebar.jsp" />
         <!-- /Sidebar -->
@@ -71,13 +71,13 @@
                     </div>
                 </div>
        
-                    
+                     
 <div class="row">
-    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+  <%--  <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
         <div class="card dash-widget">
             <div class="card-body">
                 <a href="worker.jsp" style="text-decoration: none; color: inherit;">
-                    <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+                    <span class="dash-widget-icon"><i class="fa fa-users"></i></span>
                     <div class="dash-widget-info">
                         <% int WCount = WorkerDAO.totalCount(); %>
                         <h3><%=WCount %></h3>
@@ -87,14 +87,14 @@
             </div>
         </div>
     </div>
-
+ --%>
                     
                     
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <div class="card dash-widget">
                             <div class="card-body">
                              <a href="appointment.jsp" style="text-decoration: none; color: inherit;">
-                                <span class="dash-widget-icon"><i class="fa fa-users"></i></span>
+                                <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
                                 <div class="dash-widget-info">
                                   <%int BCount = AppointmentDAO.totalCount(); %>
                                     <h3><%=BCount %></h3>
@@ -126,7 +126,7 @@
                         <div class="card dash-widget">
                             <div class="card-body">
                                 <a href="vechicle.jsp" style="text-decoration: none; color: inherit;">
-                                <span class="dash-widget-icon"><i class="fa fa-user"></i></span>
+                                <span class="dash-widget-icon"><i class="fa fa-car"></i></span>
                                 <div class="dash-widget-info">
                                    <%int VCount = VechicleDAO.totalCount(); %>
                                     <h3><%=VCount %></h3>
@@ -143,6 +143,70 @@
 
 
 
+
+
+
+
+
+
+<div class="row">
+    
+                    
+                    
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="card dash-widget">
+                            <div class="card-body">
+                             <a href="appointment_current.jsp" style="text-decoration: none; color: inherit;"> 
+                                <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+                                <div class="dash-widget-info">
+                                  <%int current = AppointmentDAO.currentCount(); %>
+                                    <h3><%=current %></h3>
+                                    <span>current Bookings</span>
+                                </div>
+                                  </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                 
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="card dash-widget">
+                            <div class="card-body">
+                              <a href="appointment_completed.jsp" style="text-decoration: none; color: inherit;"> 
+                                <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+                                <div class="dash-widget-info">
+                                  <%int completed = AppointmentDAO.completedCount(); %>
+                                    <h3><%=completed %></h3>
+                                    <span>completed Bookings</span>
+                                </div>
+                                  </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                   
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                        <div class="card dash-widget">
+                            <div class="card-body">
+                            <a href="appointment_cancelled.jsp" style="text-decoration: none; color: inherit;"> 
+                                <span class="dash-widget-icon"><i class="fa fa-cubes"></i></span>
+                                <div class="dash-widget-info">
+                                  <%int cancelled = AppointmentDAO.cancelledCount(); %>
+                                    <h3><%=cancelled %></h3>
+                                    <span>cancelled Bookings</span>
+                                </div>
+                                  </a>
+                            </div>
+                        </div>
+                    </div>
+                                
+                                  </a>
+                            </div>
+                        </div>
+                    </div>
+</div>
 
 
 
@@ -186,7 +250,7 @@
     <script src="js/chart.js"></script>
 
     
-    <script src="js/app.js"></script>
+
    
 </body>
 </html>

@@ -261,4 +261,70 @@ public class CustomerDAO {
 
 		    return abc;
 		}
+	  
+	  // retrieves all phone numbers
+	  public static List<String> getAllCustomerPhoneNumbers() {
+		    List<String> allPhoneNumbers = new ArrayList<>();
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        String query = "SELECT phno FROM customer";
+		        preparedStatement = connection.prepareStatement(query);
+		        resultSet = preparedStatement.executeQuery();
+
+		        while (resultSet.next()) {
+		            String phoneNumber = resultSet.getString("phno");
+		            allPhoneNumbers.add(phoneNumber);
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		    return allPhoneNumbers;
+		}
+	  public static String getEmailByPhoneNumber(String phoneNumber) {
+		    Connection connection = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+		    String email = null;
+
+		    try {
+		        connection = DBUtil.provideConnection();
+		        String query = "SELECT email FROM customer WHERE phno = ?;";
+		        
+		        preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setString(1, phoneNumber);
+		        resultSet = preparedStatement.executeQuery();
+
+		        if (resultSet.next()) {
+		            email = resultSet.getString("email");
+		        }
+		    } catch (Exception e) {
+		        // Handle exceptions
+		        e.printStackTrace();
+		    } finally {
+		        // Close database resources (connection, statement, result set)
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (connection != null) connection.close();
+		        } catch (Exception e) {
+		            // Handle exceptions
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return email;
+		}
+
 }

@@ -9,39 +9,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
-import com.weblabs.DAO.AppointmentDAO;
-import com.weblabs.beans.AppointmentBean;
+import com.weblabs.DAO.VechicleDAO;
+import com.weblabs.beans.VechicleBean;
 
-@WebServlet("/DAOAppointmentVIDSrv")
-public class DAOAppointmentVIDSrv extends HttpServlet {
+@WebServlet("/DAOVechicleCIDTypeSrv")
+public class DAOVechicleCIDTypeSrv extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
     	
-    	
-        String vehicleID = request.getParameter("vehicleID");
-        String transactionsuccess = request.getParameter("transactionsuccess");
-        if (vehicleID != null && transactionsuccess != null && transactionsuccess.equals("success")) {    
-        List<AppointmentBean> allAppointment = getAppointment(vehicleID);
+        String customerID = request.getParameter("customerID");
+        String vehicleType = request.getParameter("vehicleType");
+    
+        // Your existing servlet code here
+        List<VechicleBean> allVehicless = getVechcilewithtype(customerID,vehicleType);
 
        
         // Convert the list to JSON
-        String jsonResponse = new Gson().toJson(allAppointment);
+        String jsonResponse = new Gson().toJson(allVehicless);
 
         // Set the content type and write the JSON response
         response.setContentType("application/json");
         response.getWriter().write(jsonResponse);
     }
-    }
+
   
 
-    public List<AppointmentBean> getAppointment(String vehicleID) {
-        List<AppointmentBean> allAppointments = AppointmentDAO.getAppointmentByVehicleID(vehicleID);
-        return allAppointments;
+    public List<VechicleBean> getVechcilewithtype(String customerID,String vehicleType) {
+        List<VechicleBean> allVehicles = VechicleDAO.getVehiclesByCustomerIDAndVehicleType(customerID,vehicleType);
+        return allVehicles;
     }
 
     

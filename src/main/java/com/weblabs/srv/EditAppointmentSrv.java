@@ -25,26 +25,35 @@ public class EditAppointmentSrv extends HttpServlet {
     	//in jsp order write*****************
         String appointmentID = request.getParameter("appointmentID");
         String customerID= request.getParameter("customerID");
-        String vehicleID = request.getParameter("vehicleID");
-        String serviceID = request.getParameter("serviceID");
+        String VIN = request.getParameter("VIN");
         String appointmentdate = request.getParameter("appointmentdate");
-        String appointmenttime = request.getParameter("appointmenttime");
-        String status = request.getParameter("status");
+        String A11 = request.getParameter("A11"); 
+        String A12  = request.getParameter("A12");
+        String A13 = request.getParameter("A13"); 
+        String A14 = request.getParameter("A14"); 
+        String A15 = request.getParameter("A15");
+        String A16 = request.getParameter("A16");
+        String A17 = request.getParameter("A17"); 
+        String A18 = request.getParameter("A18");
         
         AppointmentBean dept = new AppointmentBean();
-        //same above order
         dept.setAppointmentID(appointmentID);
         dept.setCustomerID(customerID);
-        dept.setVehicleID(vehicleID);
-        dept.setServiceID(serviceID);
+        dept.setVIN(VIN);
         dept.setAppointmentdate(appointmentdate);
-        dept.setAppointmenttime(appointmenttime);
-        dept.setStatus(status);
-        //dept.setAppointmentID(appointmentID);
+        dept.setA11(A11);
+        dept.setA12(A12);		
+        dept.setA13(A13);
+        dept.setA14(A14);
+        dept.setA15(A15);		
+        dept.setA16(A16);
+        dept.setA17(A17);
+        dept.setA18(A18);		
+    	
         
         AppointmentServiceImp dao = new AppointmentServiceImp();
    
-        String status2 = dao.editA(appointmentID,customerID, vehicleID, serviceID, appointmentdate,appointmenttime, status);
+        String status2 = dao.editA(appointmentID,customerID, VIN, appointmentdate,A11, A12, A13, A14, A15, A16, A17, A18);
 
         RequestDispatcher rd = request.getRequestDispatcher("appointment_edit.jsp?message=" + status2);
         rd.forward(request, response);

@@ -2,10 +2,10 @@
 <%@ page import="com.weblabs.beans.AddressBean" %>
 <%@ page import="com.weblabs.beans.CustomerBean" %>
 <%@ page import="java.util.List" %>
-<%
+<%-- <%
     // Getting the username from the session
     String username = (String)session.getAttribute("customername");
-%>
+%> --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +15,7 @@
     <meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
-    <title>Invoices - HRMS admin template</title>
+    <title>customer -  admin template</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -96,11 +96,25 @@
         sessionRec.setAttribute("recordsPerPage", String.valueOf(newRecordsPerPage));
     }
     %>
+<script>
+    var recordsPerPage = <%= recordsPerPage %>; // Use Java variable in JavaScript
+    var currentPage = <%= currentPage %>; 
+ 
+    function changeRecordsPerPage() {
+        var recordsPerPageSelect = document.getElementById("recordsPerPage");
+        var selectedValue = recordsPerPageSelect.value;
+        
+        // Update the URL with the selected "recordsPerPage" value and navigate to it
+        var baseUrl = window.location.href.split('?')[0];
+        var newUrl = baseUrl + '?newRecordsPerPage=' + selectedValue;
+        window.location.href = newUrl;
+    }
+</script>
 
     <!-- Main Wrapper -->
     <div class="main-wrapper">
 
-       
+        <jsp:include page="header.jsp" />
 <jsp:include page="sidebar.jsp" />
         <!-- Page Wrapper -->
         <div class="page-wrapper">
@@ -113,18 +127,18 @@
                     <div class="row align-items-center">
                         <div class="col">
                         <div id="welcomeMessage" style="text-align: center; margin-top: 20px; font-size: 24px;">
-                                Welcome  <%= username%>!
+                                Welcome Admin !
                               </div>
                             <h3 class="page-title">Customer profiles</h3>
                             
                         </div>
-                        <div class="col-auto float-right ml-auto">
+                       <!--  <div class="col-auto float-right ml-auto">
                             <a href="customerprofile_add.jsp" class="btn add-btn"><i class="fa fa-plus"></i> Create profile</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
-  <form action="./SearchCustomerSrv" method="post">
+  <%-- <form action="./SearchCustomerSrv" method="post">
              
             <div class="row filter-row">
                 <div class="col-sm-6 col-md-3">
@@ -157,7 +171,7 @@
         </select>
         
     </div>
-</form>            
+</form>          --%>   
             
             
                 <div class="row">
@@ -174,13 +188,15 @@
                                         <th>phno</th>
                                         <th>firstname</th>
                                         <th>lastname </th>
-                                        <th style="text-align: center;" colspan="2">Actions</th>
+                                       <!--  <th style="text-align: center;" colspan="2">Actions</th> -->
                                        </tr>
                                 </thead>
                                 <tbody>
                                     <%
                                     int start = 0;
                                     int limit = 25;
+                                    int pageno = 1;
+                                    int noOfPages = 0;
                                     String usernameFilter = request.getParameter("customername");
                                     String idFilter = request.getParameter("customerID");
                                     List<CustomerBean> resultSet;
@@ -220,9 +236,9 @@
                                         <td class="toggle"><%= invoice.getFirstname() %></td>
                                         <td class="toggle"><%= invoice.getLastname() %></td>
                                         
-                                        <td>
+                                       <%--  <td>
                                       <a href="customerprofile_edit.jsp?customerID=<%= invoice.getCustomerID() %>">Edit</a>
-                                       </td>
+                                       </td> --%>
                                         
                                     </tr>
 										<!-- Child Table for Invoice Items -->
@@ -270,6 +286,31 @@
                                     <% } %>
                                 </tbody>
                             </table>
+                            
+                            
+       <div class="row justify-content-center align-items-center" id = "flag1">
+   
+   <!-- Pagination links -->
+
+    <% if (pageno > 1) { %>
+        <a href="service.jsp?page=<%=pageno - 1%>">Previous</a>
+    <% } %>
+
+    <% for (int i = 1; i <= noOfPages; i++) { %>
+        <% if (i == pageno) { %>
+            <%=i%>
+        <% } else { %>
+            <a href="service.jsp?page=<%=i%>"><%=i%></a>
+        <% } %>
+    <% } %>
+
+    <% if (pageno < noOfPages) { %>
+        <a href="service.jsp?page=<%=pageno + 1%>">Next</a>
+    <% } %>
+
+</div>                     
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -292,8 +333,18 @@
   });
 </script>
 
+ <script src="js/jquery-3.2.1.min.js"></script>
 
-   
+		
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+		
+		<script src="js/jquery.slimscroll.min.js"></script>
+		
+		
+		<script src="js/select2.min.js"></script>
+
     
 </body>
 </html>

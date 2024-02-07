@@ -6,14 +6,9 @@
 <%@page import="com.weblabs.DAO.AppointmentDAO"%>
 <%@page import="com.weblabs.DAO.CustomerDAO"%>
 <%@ page import="com.weblabs.beans.CustomerBean" %>
-<%
-   // Retrieve VIN from the URL parameter
-/* String customerID = request.getParameter("customerID"); */
- String customerID = (String) session.getAttribute("customerID");
-//String a[] = request.getParameterValues("selectedServices");
-//for (String value : a) {
+<%@ page import="java.net.URLEncoder" %>
 
-%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -94,9 +89,11 @@ if (newRecordsPerPageParam != null) {
 
 
 
+
+
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
-		
+			 <jsp:include page="header.jsp" />
 		 <jsp:include page="sidebar.jsp" />
      
         <!-- Include your sidebar HTML here -->			
@@ -111,43 +108,16 @@ if (newRecordsPerPageParam != null) {
 						<div class="row align-items-center">
 							<div class="col">
 							<div id="welcomeMessage" style="text-align: center; margin-top: 20px; font-size: 24px;">
-                                Welcome <%= customerID%>!
+                                Welcome !
                               </div>
 								<h3 class="page-title">appointment</h3>
 							</div>
 							<div class="col-auto float-right ml-auto">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#addappointment"><i class="fa fa-plus"></i> Add appointment</a>
+							<!-- <a href="#" class="btn add-btn" data-toggle="modal" data-target="#addappointment"><i class="fa fa-plus"></i> Add appointment</a> -->
 							</div>
 						</div>
 					</div>
-					<!-- /Page Header -->
-					<!-- Search Filter -->
-					<form action="./SearchAppointmentSrv" method="post">
-    <div class="row filter-row">
-        <div class="col-sm-6 col-md-3">
-            <div class="form-group form-focus select-focus">
-                <label for="id">appointmentID:</label>
-                <input type="text" name="appointmentID" id="appointmentID">
-            </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-            <input style="margin-top: 29px;" type="submit" value="Search">
-        </div>
-    </div>
-    <input type="hidden" name="start" value="<%= currentPage %>">
-    <input type="hidden" name="limit" value="<%= newRecordsPerPage %>">
-
-    <div class="col-sm-6 col-md-3" id = "flag">
-        <label>Records per page:</label>
-        <select id="recordsPerPage" onchange="changeRecordsPerPage()">
-            
-            <option value="10">10</option>
-           
-          
-        </select>
-        
-    </div>
-</form>
+					
 								<table>
 									<thead>
 										<tr>
@@ -155,13 +125,14 @@ if (newRecordsPerPageParam != null) {
 											<th>appointmentID</th>
 											<th>customerID </th>
 									        <th>vehicleID</th>
-									        <th>serviceID</th>
 									        <th>appointment date</th>
-									        <th>status</th>
-									        <th>Edit</th>
-									         <th>Delete</th>    
+									        <th>appointment startTime</th>
+									        <th>appointment sendTime</th>
+									         <th>End_datetime</th>
+									         <th>Status</th>
 										</tr>
 									</thead>
+
 <%
 int start = currentPage;
 int limit = newRecordsPerPage;
@@ -178,7 +149,7 @@ if (pageNoStr != null) {
 start = (pageno - 1) * limit;
 // pagenation code ended
 String usernameFilter = request.getParameter("description");
-String idFilter = request.getParameter("appointmentID");
+String idFilter = request.getParameter("vehicleID");
 List<AppointmentBean> tax;
 
 String whereClause = ""; // Initialize an empty whereClause
@@ -191,7 +162,7 @@ if (idFilter != null && !idFilter.isEmpty()) {
     if (!whereClause.isEmpty()) {
         whereClause += " or ";
     }
-    whereClause += "appointmentID = '" + idFilter + "'";
+    whereClause += "vehicleID = '" + idFilter + "'";
 }
 // page
 int recordcount = AppointmentDAO.totalCount();
@@ -206,29 +177,24 @@ if (!whereClause.isEmpty()) {
     tax = AppointmentDAO.getFilteredAppointment("", start, limit);
 }
 for (AppointmentBean tasks : tax) {
-	CustomerBean pro = CustomerDAO.getCustomerById(tasks.getAppointmentID()); 
+	CustomerBean pro = CustomerDAO.getCustomerById(tasks.getCustomerID()); 
 %>
+	
 <tr>
+    <!-- ... Your table row content ... -->
     <td><%=tasks.getAppointmentID() %></td>
-   <%--  <td><%=tasks.getCustomerID() %></td> --%>
-   <td><%= pro != null ? pro.getCustomername() : "N/A" %></td> 
-    <td><%=tasks.getVehicleID() %></td>
-    <td><%=tasks.getServiceID() %></td>
+    <td><%=tasks.getCustomerID() %></td> 
+    <td><%=tasks.getVIN() %></td>
     <td><%=tasks.getAppointmentdate() %></td>
-    <td><%=tasks.getStatus() %></td>
-    <td>
-        <a href="appointment_edit.jsp?appointmentID=<%= tasks.getAppointmentID() %>">Edit</a>
-    </td>
-    <td>
-<%--          <a href="delete_task.jsp?id=<%= tasks.getTask_id() %>">Delete</a>  --%>
-        <a href="DeleteAppointmentSrv?appointmentID=<%= tasks.getAppointmentID() %>">Delete</a> 
-    </td>
+   <td><%=tasks.getStart_time()%></td>
+    <td><%=tasks.getEnd_time()%></td>
+    <td><%=tasks.getEnd_datetime() %></td>
+     <td><%=tasks.getStatus()%></td>
 </tr>
 <%
-}
+} 
 %>
-
-								</table>
+	</table>
 <div class="row justify-content-center align-items-center" id = "flag1">
    
    <!-- Pagination links -->
@@ -254,13 +220,10 @@ for (AppointmentBean tasks : tax) {
 						</div>
 					</div>
                
-				<!-- /Page Content -->
-				
-				<!-- Add Tax Modal -->
-				 <jsp:include page="appointment_add.jsp" />
+				<%--  <jsp:include page="appointment_add.jsp" /> --%>
 			
 				
-            </div>
+           
 	
 
 		
@@ -277,8 +240,9 @@ for (AppointmentBean tasks : tax) {
 		<script src="js/select2.min.js"></script>
 
 		
-		<script src="js/app.js"></script>
+		
 
 
     </body>
 </html>
+

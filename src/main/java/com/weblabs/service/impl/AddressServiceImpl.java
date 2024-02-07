@@ -1,5 +1,4 @@
 
-
 package com.weblabs.service.impl;
 
 import java.sql.Connection;
@@ -7,12 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import com.weblabs.utility.DBUtil;
 
-public class BookingServiceImpl {
+public class AddressServiceImpl {
 
 	
-	//bookingID, vehicleID, appointmentID, serviceID
+	//addressID, customerID, street, city, postal_code, state, hno
 	
-	public String addB(String vehicleID,String appointmentID,String serviceID) {
+	public String addV(String customerID,String street,String city,String postal_code,String state,String hno) {
 		
 		String Status1 = " Adding Failed!";
 
@@ -20,17 +19,18 @@ public class BookingServiceImpl {
         PreparedStatement ps = null;
 
         try {
-        	ps = con.prepareStatement("INSERT INTO booking (vehicleID, appointmentID, serviceID) VALUES (?,?,?)");
-        	ps.setString(1, vehicleID);
-        	ps.setString(2, appointmentID);
-            ps.setString(3, serviceID);
-            
-           
+        	ps = con.prepareStatement("INSERT INTO address ( customerID, street, city, postal_code, state, hno) VALUES (?,?,?,?,?,?)");
+        	ps.setString(1, customerID);
+        	ps.setString(2, street);
+            ps.setString(3, city);
+            ps.setString(4, postal_code);
+            ps.setString(5, state);
+            ps.setString(6, hno);
            
             int k = ps.executeUpdate();
 
             if (k > 0) {
-                Status1 = " Added Successfully!";
+                Status1 = "Vechicle Added Successfully!";
             }
         } catch (SQLException e) {
             Status1 = "Error: " + e.getMessage();
@@ -44,7 +44,7 @@ public class BookingServiceImpl {
 	}
 	
 	
-	public String editB(String bookingID,String vehicleID,String appointmentID,String serviceID)  {
+	public String editV(String addressID,String customerID,String street,String city,String postal_code,String state,String hno)  {
 		
 			String Status3 = "Updating  Failed!";
 
@@ -52,13 +52,15 @@ public class BookingServiceImpl {
 	        PreparedStatement ps = null;
 
 	        try {
-	        	ps = con.prepareStatement("UPDATE booking SET vehicleID= ?, appointmentID= ?, serviceID= ? WHERE bookingID = ?");
+	        	ps = con.prepareStatement("UPDATE address SET  customerID = ?, street = ?, city = ?, postal_code = ?, state = ?, hno = ? WHERE addressID = ?");
 	        	
-	        	ps.setString(1, vehicleID);
-	        	ps.setString(2, appointmentID);
-	            ps.setString(3, serviceID);
-	            ps.setString(4, bookingID);
-	           
+	        	ps.setString(1, customerID);
+	        	ps.setString(2, street);
+	            ps.setString(3, city);
+	            ps.setString(4, postal_code);
+	            ps.setString(5, state);
+	            ps.setString(6, hno);
+	            ps.setString(7, addressID);
 	             
 	           
 	            int k = ps.executeUpdate();
@@ -79,15 +81,15 @@ public class BookingServiceImpl {
 	}
 
 	
-	public String deleteB(String bookingID) {
+	public String deleteV(String addressID) {
 		String Status2 = " delete Failed!";
 
         Connection con = DBUtil.provideConnection();
         PreparedStatement ps = null;
 
         try {
-        	ps = con.prepareStatement("DELETE FROM booking  WHERE bookingID = ?");
-            ps.setString(1, bookingID);
+        	ps = con.prepareStatement("DELETE FROM address  WHERE addressID = ?");
+            ps.setString(1, addressID);
            
             int k = ps.executeUpdate();
 

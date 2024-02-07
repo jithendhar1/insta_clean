@@ -26,7 +26,7 @@ public class DeleteServiceSrv  extends HttpServlet {
 
 			String status = b.deleteS(serviceID);
 			
-	        RequestDispatcher rd = request.getRequestDispatcher("delete_.jsp?message=" + status);
+	        RequestDispatcher rd = request.getRequestDispatcher("sevice.jsp?message=" + status);
 	        rd.forward(request, response);
 	    }
 

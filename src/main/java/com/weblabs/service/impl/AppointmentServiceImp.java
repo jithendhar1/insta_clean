@@ -8,10 +8,10 @@ import com.weblabs.utility.DBUtil;
 
 public class AppointmentServiceImp {
 
+
+
 	
-	//appointmentID, customerID, vehicleID, serviceID, appointmentdate, status
-	
-	public String addA(String customerID,String vehicleID,String serviceID,String appointmentdate,String appointmenttime,String status) {
+	public String addA(String customerID,String VIN,String appointmentdate,String A11,String A12,String A13,String A14,String A15,String A16,String A17,String A18,String start_time,String end_time,String total_price,String total_timetakes) {
 		
 		String Status1 = " Adding Failed!";
 
@@ -19,14 +19,24 @@ public class AppointmentServiceImp {
         PreparedStatement ps = null;
 
         try {
-        	ps = con.prepareStatement("INSERT INTO appointment (customerID, vehicleID, serviceID, appointmentdate,appointmenttime, status) VALUES (?,?,?,?,?,?)");
+        	ps = con.prepareStatement("INSERT INTO appointment (customerID, VIN, appointmentdate,A11, A12, A13, A14, A15, A16, A17, A18,status, start_time, end_time, end_datetime,total_price,total_timetakes) VALUES (?,?,?,?,?,?,?,?,?,?,?,'current',?,?,DATE_ADD(appointmentdate, INTERVAL end_time MINUTE),?,?)");
+        	
         	ps.setString(1, customerID);
-        	ps.setString(2, vehicleID);
-            ps.setString(3, serviceID);
-            ps.setString(4, appointmentdate);
-            ps.setString(5, appointmenttime);
-            ps.setString(6, status);
-          
+        	ps.setString(2, VIN);
+            ps.setString(3, appointmentdate);
+            ps.setString(4, A11);
+            ps.setString(5, A12);
+            ps.setString(6, A13);
+            ps.setString(7, A14);
+            ps.setString(8, A15);
+            ps.setString(9, A16);
+            ps.setString(10, A17);
+            ps.setString(11, A18);
+            ps.setString(12, start_time);
+            ps.setString(13, end_time);
+            ps.setString(14, total_price);
+            ps.setString(15, total_timetakes);
+           
            
             int k = ps.executeUpdate();
 
@@ -45,7 +55,7 @@ public class AppointmentServiceImp {
 	}
 	
 	
-	public String editA(String appointmentID,String customerID,String vehicleID,String serviceID,String appointmentdate,String appointmenttime,String status)  {
+	public String editA(String appointmentID,String customerID,String VIN,String appointmentdate,String A11,String A12,String A13,String A14,String A15,String A16,String A17,String A18)  {
 		
 			String Status3 = "Updating  Failed!";
 
@@ -53,15 +63,19 @@ public class AppointmentServiceImp {
 	        PreparedStatement ps = null;
 
 	        try {
-	        	ps = con.prepareStatement("UPDATE appointment SET customerID= ?, vehicleID= ?, serviceID= ?, appointmentdate= ?,appointmenttime=?, status= ? WHERE appointmentID = ?");
+	        	ps = con.prepareStatement("UPDATE appointment SET customerID= ?, VIN= ?,  appointmentdate= ?, A11=?, A12=?, A13=?, A14=?, A15=?, A16=?, A17=?, A18=? WHERE appointmentID = ?");
 	        	
 	        	ps.setString(1, customerID);
-	        	ps.setString(2, vehicleID);
-	            ps.setString(3, serviceID);
-	            ps.setString(4, appointmentdate);
-	            ps.setString(5, appointmenttime);
-	            ps.setString(6, status);
-	            ps.setString(7, appointmentID);
+	        	ps.setString(2, VIN);
+	            ps.setString(3, appointmentdate);
+	            ps.setString(4, A11);
+	            ps.setString(5, A12);
+	            ps.setString(6, A13);
+	            ps.setString(7, A14);
+	            ps.setString(8, A15);
+	            ps.setString(9, A16);
+	            ps.setString(10, A17);
+	            ps.setString(11, A18);
 	           
 	            int k = ps.executeUpdate();
 

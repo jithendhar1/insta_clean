@@ -21,7 +21,7 @@ public class DBUtil {
 	            String connectionString = rb.getString("jdbc.url");
 	            String driverName = rb.getString("jdbc.driver");
 	            String username = rb.getString("jdbc.username");
-	            String password = rb.getString("jdbc.password");
+            String password = rb.getString("jdbc.password");
 
 	            try {
 	                Class.forName(driverName);

@@ -30,8 +30,7 @@ public class AddVechicleSrv extends HttpServlet {
         VechicleServiceImpl add = new VechicleServiceImpl();
         status = add.addV(customerID, vehicleType, vehicleModel, VIN,brand);
 
-        RequestDispatcher rd = request.getRequestDispatcher("vechicle_add.jsp?message=" + status);
-        rd.forward(request, response);
+        response.getWriter().write("success");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

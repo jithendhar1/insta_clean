@@ -1,8 +1,8 @@
 <%
     // Getting the username from the session
    
-     String customerID = (String) session.getAttribute("customerID");
-  //  String username = "customerID";
+   //  String customerID1 = (String) session.getAttribute("customerID");
+    String customerID1 = "1";
 %>
 
 <form action="./AddVechicleSrv" method="post">
@@ -10,7 +10,9 @@
     <div class="col-md-6">
         <div class="form-group">
             <label for="customerID">Customer ID <span class="text-danger">*</span></label>
-            <input id="customerID" name="customerID" class="form-control" type="hidden">
+            <!-- <input id="customerID" name="customerID1" class="form-control" type="hidden"> -->
+            <input id="customerID" name="customerID" class="form-control" type="hidden" value="<%= customerID1 %>">
+            
         </div>
     </div>
 

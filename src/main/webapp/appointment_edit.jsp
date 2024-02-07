@@ -133,28 +133,23 @@
     <div class="col-md-6">
         <div class="form-group">
             <label class="col-form-label"> vehicleID <span class="text-danger">*</span></label>
-            <input name="vehicleID" required class="form-control" type="text" value="<%= task.getVehicleID() %>">
+            <input name="vehicleID" required class="form-control" type="text" value="<%= task.getVIN() %>">
         </div>
     </div>
 
-    <div class="col-md-6">
-        <div class="form-group">
-            <label class="col-form-label">serviceID <span class="text-danger">*</span></label>
-            <input name="serviceID" required class="form-control" type="text" value="<%= task.getServiceID() %>">
-        </div>
-    </div>
+    
 <div class="col-md-6">
         <div class="form-group">
             <label class="col-form-label">appointmentdate <span class="text-danger">*</span></label>
             <input name="appointmentdate" required class="form-control" type="text" value="<%= task.getAppointmentdate() %>">
         </div>
     </div>
-    <div class="col-md-6">
+    <%-- <div class="col-md-6">
         <div class="form-group">
-            <label class="col-form-label">status <span class="text-danger">*</span></label>
-            <input name="status" required class="form-control" type="text" value="<%= task.getStatus() %>">
+            <label class="col-form-label">appointmenttime <span class="text-danger">*</span></label>
+            <input name="appointmenttime" required class="form-control" type="text" value="<%= task.getAppointmenttime() %>">
         </div>
-    </div>
+    </div> --%>
   
     <div class="submit-section">
         <button type="submit"  class="btn btn-primary submit-btn">Submit</button>

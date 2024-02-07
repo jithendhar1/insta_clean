@@ -23,7 +23,7 @@ public class SearchWorkerSrv extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
-    	String vechicleFilter = request.getParameter("supplierName");
+    	String vechicleFilter = request.getParameter("worker_name");
         String idFilter = request.getParameter("workerID");
   
 
@@ -44,7 +44,7 @@ public class SearchWorkerSrv extends HttpServlet {
          
       	if (idFilter == null || idFilter.isEmpty()) {
       	 int idFilterInt = 0;
-      	suppliers = WorkerDAO.getFilteredWorkers("workerID like '%" + vechicleFilter + "%' or workerID = '" + idFilterInt + "'", start, limit);
+      	suppliers = WorkerDAO.getFilteredWorkers("worker_name like '%" + vechicleFilter + "%' or worker_name = '" + idFilterInt + "'", start, limit);
       	}
       	else {
       		suppliers = WorkerDAO.getFilteredWorkers("workerID like '%" + vechicleFilter + "%' and workerID = '" + idFilter + "'", start, limit);

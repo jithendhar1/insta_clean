@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.weblabs.service.impl.ServiceServiceImpl" %>
-<%@ page import="com.weblabs.beans.ServiceBean" %>
+<%@ page import="com.weblabs.service.impl.AppointmentServiceImp" %>
+<%@ page import="com.weblabs.beans.AppointmentBean" %>
 <%@ page import="java.util.List" %>
-<%@page import="com.weblabs.DAO.ServiceDAO"%>
-<%@page import="com.weblabs.DAO.CustomerDAO"%>
-<%@ page import="com.weblabs.beans.CustomerBean" %>
+<%@page import="com.weblabs.DAO.AppointmentDAO"%>
+<%@page import="com.weblabs.DAO.AppointmentServicesDAO"%>
+<%@ page import="com.weblabs.beans.AppointmentServicesBean" %>
+<%@ page import="java.net.URLEncoder" %>
 
-<%
-    // Getting the username from the session
-    String username = (String)session.getAttribute("customername");
-%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,7 +18,7 @@
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
         <meta name="author" content="Dreamguys - Bootstrap Admin Template">
         <meta name="robots" content="noindex, nofollow">
-        <title>Services -  template</title>
+        <title>appointment -  template</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -91,10 +89,13 @@ if (newRecordsPerPageParam != null) {
 
 
 
+
+
 		<!-- Main Wrapper -->
         <div class="main-wrapper">
-		<jsp:include page="header.jsp" />
-     <jsp:include page="sidebar.jsp" />
+			 <jsp:include page="header.jsp" />
+		 <jsp:include page="sidebar.jsp" />
+     
         <!-- Include your sidebar HTML here -->			
 			<!-- Page Wrapper -->
             <div class="page-wrapper">
@@ -107,43 +108,31 @@ if (newRecordsPerPageParam != null) {
 						<div class="row align-items-center">
 							<div class="col">
 							<div id="welcomeMessage" style="text-align: center; margin-top: 20px; font-size: 24px;">
-                                Welcome <%= username%>! 
+                                Welcome !
                               </div>
-								<h3 class="page-title">Services</h3>
-								<!-- <ul class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.jsp">Dashboard</a></li>
-									<li class="breadcrumb-item active">Tasks</li>
-								</ul> -->
+								<h3 class="page-title">Services to give for workers</h3>
 							</div>
 							<div class="col-auto float-right ml-auto">
-							<a href="#" class="btn add-btn" data-toggle="modal" data-target="#addservice"><i class="fa fa-plus"></i> Add Services</a>
+							<!-- <a href="#" class="btn add-btn" data-toggle="modal" data-target="#addappointment"><i class="fa fa-plus"></i> Add appointment</a> -->
 							</div>
 						</div>
 					</div>
-			
-			
-			
-   
-
- 
- 
- 
- 
+					
 								<table>
 									<thead>
 										<tr>
 							
-											<th>serviceID</th>
-											<th>servicename </th>
-									        <th>description</th>
-									        <th>price</th>
-									       <!--  <th>discount</th>
-									        <th>coupons</th> -->
-									         <th>type</th>
-									        <th>Edit</th>
-									         <th>Delete</th>    
+											<th>ID</th>
+											<th>serviceID </th>
+									        <th>service name</th>
+									         <th>appointment date </th> 
+									        <th>time takes </th>
+									        <th>appointmentID </th>
+									         <!-- <th>workerID</th> -->
+									         <th>workers </th>
 										</tr>
 									</thead>
+
 <%
 int start = currentPage;
 int limit = newRecordsPerPage;
@@ -160,8 +149,8 @@ if (pageNoStr != null) {
 start = (pageno - 1) * limit;
 // pagenation code ended
 String usernameFilter = request.getParameter("description");
-String idFilter = request.getParameter("serviceID");
-List<ServiceBean> tax;
+String idFilter = request.getParameter("ID");
+List<AppointmentServicesBean> tax;
 
 String whereClause = ""; // Initialize an empty whereClause
 
@@ -173,82 +162,69 @@ if (idFilter != null && !idFilter.isEmpty()) {
     if (!whereClause.isEmpty()) {
         whereClause += " or ";
     }
-    whereClause += "serviceID = '" + idFilter + "'";
+    whereClause += "ID = '" + idFilter + "'";
 }
 // page
-int recordcount = ServiceDAO.totalCount();
+int recordcount = AppointmentServicesDAO.totalCount();
 
 noOfPages = (int) Math.ceil((double) recordcount / limit);
 // pagee
 if (!whereClause.isEmpty()) {
     // Apply the whereClause condition
-    tax = ServiceDAO.getFilteredServices(whereClause, start, limit);
+    tax = AppointmentServicesDAO.getAppointmentServicesBean(whereClause, start, limit);
 } else {
     // Retrieve all data based on the limit
-    tax = ServiceDAO.getFilteredServices("", start, limit);
+	  tax = AppointmentServicesDAO.getAppointmentServicesBean("", start, limit);
 }
-for (ServiceBean tasks : tax) {
-	//CustomerBean pro = CustomerDAO.getCustomerById(tasks.getCustomerID()); 
+for (AppointmentServicesBean tasks : tax) {
+	List<AppointmentBean> pro = AppointmentDAO.getAppointmentByappointmentID(tasks.getAppointmentID()); 
+	
 %>
+	
 <tr>
+  
+    <td><%=tasks.getID() %></td>
     <td><%=tasks.getServiceID() %></td>
-    <td><%=tasks.getServicename() %></td>  
-    <td><%=tasks.getDescription() %></td>
-    <td><%=tasks.getPrice() %></td>
-   <%--  <td><%=tasks.getDiscount() %></td>
-     <td><%=tasks.getCoupons() %></td> --%>
-     <td><%=tasks.getType() %></td>
+    <td><%=tasks.getServicename() %></td>
+   <td><%=tasks.getAppointment().getAppointmentdate() %></td> 
+    <td><%=tasks.getTimetakes() %></td>
+    <td><%=tasks.getAppointmentID() %></td>
+     <%-- <td><%=pro.get %></td> --%>
     <td>
-        <a href="service_edit.jsp?serviceID=<%= tasks.getServiceID() %>">Edit</a>
-    </td>
-    <td>
-<%--          <a href="delete_task.jsp?id=<%= tasks.getTask_id() %>">Delete</a>  --%>
-        <a href="DeleteServiceSrv?serviceID=<%= tasks.getServiceID() %>">Delete</a> 
+        <a href="appointment_services_edit.jsp?ID=<%= tasks.getID() %>">EDIT</a>
     </td>
 </tr>
 <%
 }
 %>
-
-								</table>
-								
-								
-      
+	</table>
 <div class="row justify-content-center align-items-center" id = "flag1">
    
    <!-- Pagination links -->
 
     <% if (pageno > 1) { %>
-        <a href="service.jsp?page=<%=pageno - 1%>">Previous</a>
+        <a href="appointment_services.jsp?page=<%=pageno - 1%>">Previous</a>
     <% } %>
 
     <% for (int i = 1; i <= noOfPages; i++) { %>
         <% if (i == pageno) { %>
             <%=i%>
         <% } else { %>
-            <a href="service.jsp?page=<%=i%>"><%=i%></a>
+            <a href="appointment_services.jsp?page=<%=i%>"><%=i%></a>
         <% } %>
     <% } %>
 
     <% if (pageno < noOfPages) { %>
-        <a href="service.jsp?page=<%=pageno + 1%>">Next</a>
+        <a href="appointment_services.jsp?page=<%=pageno + 1%>">Next</a>
     <% } %>
 
-</div>			</div>
+</div>
+							</div>
 						</div>
-						
 					</div>
                
-				<!-- /Page Content -->
-				
-				<!-- Add Tax Modal -->
-				 <jsp:include page="service_add.jsp" />
-			
-				
-             </div>
+				<%--  <jsp:include page="appointment_add.jsp" /> --%>
 	
-
-		
         <script src="js/jquery-3.2.1.min.js"></script>
 
 		
@@ -262,8 +238,9 @@ for (ServiceBean tasks : tax) {
 		<script src="js/select2.min.js"></script>
 
 		
-		<!-- <script src="js/app.js"></script> -->
+		
 
 
     </body>
 </html>
+

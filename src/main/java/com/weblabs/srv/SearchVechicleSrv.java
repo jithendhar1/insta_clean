@@ -23,7 +23,7 @@ public class SearchVechicleSrv extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
-    	String vechicleFilter = request.getParameter("supplierName");
+    	String vechicleFilter = request.getParameter("customerID");
         String idFilter = request.getParameter("vehicleID");
   
 
@@ -44,7 +44,7 @@ public class SearchVechicleSrv extends HttpServlet {
          
       	if (idFilter == null || idFilter.isEmpty()) {
       	 int idFilterInt = 0;
-      	suppliers = VechicleDAO.getFilteredVechicles("vehicleID like '%" + vechicleFilter + "%' or vehicleID = '" + idFilterInt + "'", start, limit);
+      	suppliers = VechicleDAO.getFilteredVechicles("customerID like '%" + vechicleFilter + "%' or customerID = '" + idFilterInt + "'", start, limit);
       	}
       	else {
       		suppliers = VechicleDAO.getFilteredVechicles("vehicleID like '%" + vechicleFilter + "%' and vehicleID = '" + idFilter + "'", start, limit);
